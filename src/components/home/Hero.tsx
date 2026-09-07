@@ -16,13 +16,24 @@ export function Hero() {
         <div className="architecture-world" aria-hidden="true">
           <div className="architecture-backplate" />
           <div className="architecture-canvas" />
+
           <div className="journey-photo-stack">
-            <figure className="journey-photo journey-photo-interior"><span className="journey-photo-shade" /></figure>
-            <figure className="journey-photo journey-photo-outdoor"><span className="journey-photo-shade" /></figure>
-            <figure className="journey-photo journey-photo-community"><span className="journey-photo-shade" /></figure>
+            <figure className="journey-photo journey-photo-interior">
+              <span className="journey-photo-shade" />
+            </figure>
+            <figure className="journey-photo journey-photo-outdoor">
+              <span className="journey-photo-shade" />
+            </figure>
+            <figure className="journey-photo journey-photo-community">
+              <span className="journey-photo-shade" />
+            </figure>
           </div>
+
           <div className="journey-curtain">
-            <div className="journey-handoff-mark"><span>Marci Metzger</span><span>The Ridge Realty Group</span></div>
+            <div className="journey-handoff-mark">
+              <span>Proven Results</span>
+              <span>Top Residential Sales Last 5 Years</span>
+            </div>
           </div>
         </div>
 
@@ -47,7 +58,7 @@ export function Hero() {
         <div className="architecture-caption" aria-hidden="true">
           <span className="architecture-chapter">Pahrump, Nevada</span>
           <span className="architecture-scroll">Scroll to explore <span>↓</span></span>
-          <span className="architecture-note">A cinematic introduction to Marci's Pahrump market</span>
+          <span className="architecture-note">Realtor for Nearly 3 Decades</span>
         </div>
         <a className="architecture-skip" href="#performance" onClick={() => {
           const target = document.querySelector<HTMLElement>('#performance')
