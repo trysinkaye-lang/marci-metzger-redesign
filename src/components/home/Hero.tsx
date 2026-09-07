@@ -15,7 +15,6 @@ export function Hero() {
 
         <div className="architecture-world" aria-hidden="true">
           <div className="architecture-backplate" />
-          <div className="architecture-canvas" />
 
           <div className="journey-photo-stack">
             <figure className="journey-photo journey-photo-interior">
@@ -27,6 +26,12 @@ export function Hero() {
             <figure className="journey-photo journey-photo-community">
               <span className="journey-photo-shade" />
             </figure>
+          </div>
+
+          <div className="journey-threshold" aria-hidden="true">
+            <div className="threshold-panel threshold-panel-left" />
+            <div className="threshold-panel threshold-panel-right" />
+            <div className="threshold-seam" />
           </div>
 
           <div className="journey-curtain">
