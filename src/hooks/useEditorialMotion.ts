@@ -10,25 +10,27 @@ export function useEditorialMotion() {
 
     media.add('(prefers-reduced-motion: no-preference) and (min-width: 48rem)', () => {
       const context = gsap.context(() => {
-        gsap.from('.hero-overline', {
+        gsap.from('.hero-motion-brand, .hero-motion-location', {
           opacity: 0,
-          y: 14,
-          duration: 0.65,
+          y: 10,
+          duration: 0.55,
+          stagger: 0.08,
           ease: 'power2.out',
         })
 
         gsap.from('.hero-motion h1 span', {
           opacity: 0,
-          y: 34,
-          duration: 0.9,
-          stagger: 0.1,
+          y: 42,
+          duration: 0.85,
+          stagger: 0.08,
           ease: 'power3.out',
         })
 
-        gsap.from('.hero-bottom-rail', {
+        gsap.from('.hero-motion-experience, .hero-motion-intro-actions', {
           opacity: 0,
-          y: 18,
-          duration: 0.75,
+          y: 16,
+          duration: 0.65,
+          stagger: 0.1,
           delay: 0.18,
           ease: 'power2.out',
         })
@@ -38,47 +40,79 @@ export function useEditorialMotion() {
             trigger: '.hero-motion',
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 1.05,
+            scrub: 0.85,
             invalidateOnRefresh: true,
           },
         })
 
         heroTimeline
-          .to('.hero-motion-frame', {
-            clipPath: 'inset(0rem 0vw 0rem 0vw)',
-            ease: 'none',
-          }, 0)
-          .to('.hero-motion-frame .hero-image', {
-            scale: 1.085,
-            yPercent: 2.6,
-            ease: 'none',
-          }, 0)
-          .to('.hero-motion h1 span:first-child', {
-            xPercent: -4,
-            ease: 'none',
-          }, 0)
-          .to('.hero-motion h1 span:last-child', {
-            xPercent: 6,
-            ease: 'none',
-          }, 0)
-          .to('.hero-motion-copy', {
-            yPercent: -7,
-            ease: 'none',
-          }, 0)
-          .to('.hero-bottom-rail', {
-            opacity: 0.18,
-            y: 24,
-            ease: 'none',
-          }, 0.55)
-          .to('.hero-location, .hero-overline', {
-            opacity: 0.28,
-            ease: 'none',
-          }, 0.42)
-          .to('.hero-motion-scroll-cue', {
-            opacity: 0,
-            y: 16,
-            ease: 'none',
-          }, 0.32)
+          .to(
+            '.hero-motion-frame',
+            {
+              clipPath: 'inset(0% 0% 0% 0%)',
+              duration: 0.58,
+              ease: 'none',
+            },
+            0,
+          )
+          .to(
+            '.hero-motion-frame .hero-image',
+            {
+              scale: 1,
+              duration: 0.62,
+              ease: 'none',
+            },
+            0,
+          )
+          .to(
+            '.hero-motion-intro',
+            {
+              opacity: 0,
+              xPercent: -7,
+              duration: 0.34,
+              ease: 'none',
+            },
+            0.12,
+          )
+          .to(
+            '.hero-motion-scroll-cue',
+            {
+              opacity: 0,
+              y: 14,
+              duration: 0.18,
+              ease: 'none',
+            },
+            0.18,
+          )
+          .to(
+            '.hero-motion-shade',
+            {
+              opacity: 1,
+              duration: 0.22,
+              ease: 'none',
+            },
+            0.42,
+          )
+          .to(
+            '.hero-motion-reveal-inner',
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.26,
+              ease: 'power2.out',
+            },
+            0.51,
+          )
+          .to(
+            '.hero-motion-reveal-actions',
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.24,
+              ease: 'power2.out',
+            },
+            0.58,
+          )
 
         const aboutTrigger = {
           trigger: '.about-profile',
@@ -162,33 +196,33 @@ export function useEditorialMotion() {
 
       const stage = document.querySelector<HTMLElement>('.hero-motion-stage')
       const image = document.querySelector<HTMLElement>('.hero-motion-frame .hero-image')
-      const copy = document.querySelector<HTMLElement>('.hero-motion-copy')
+      const intro = document.querySelector<HTMLElement>('.hero-motion-intro-main')
 
-      if (!stage || !image || !copy) {
+      if (!stage || !image || !intro) {
         return () => context.revert()
       }
 
-      const imageX = gsap.quickTo(image, 'x', { duration: 0.8, ease: 'power3.out' })
-      const imageY = gsap.quickTo(image, 'y', { duration: 0.8, ease: 'power3.out' })
-      const copyX = gsap.quickTo(copy, 'x', { duration: 0.7, ease: 'power3.out' })
-      const copyY = gsap.quickTo(copy, 'y', { duration: 0.7, ease: 'power3.out' })
+      const imageX = gsap.quickTo(image, 'x', { duration: 0.9, ease: 'power3.out' })
+      const imageY = gsap.quickTo(image, 'y', { duration: 0.9, ease: 'power3.out' })
+      const introX = gsap.quickTo(intro, 'x', { duration: 0.75, ease: 'power3.out' })
+      const introY = gsap.quickTo(intro, 'y', { duration: 0.75, ease: 'power3.out' })
 
       const onPointerMove = (event: PointerEvent) => {
         const bounds = stage.getBoundingClientRect()
         const x = (event.clientX - bounds.left) / bounds.width - 0.5
         const y = (event.clientY - bounds.top) / bounds.height - 0.5
 
-        imageX(x * 10)
-        imageY(y * 7)
-        copyX(x * -5)
-        copyY(y * -3)
+        imageX(x * 7)
+        imageY(y * 5)
+        introX(x * -3)
+        introY(y * -2)
       }
 
       const onPointerLeave = () => {
         imageX(0)
         imageY(0)
-        copyX(0)
-        copyY(0)
+        introX(0)
+        introY(0)
       }
 
       stage.addEventListener('pointermove', onPointerMove)
