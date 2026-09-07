@@ -23,10 +23,11 @@ export function createPhotoExperience(section: HTMLElement, signal: AbortSignal)
 
   const cssVariables = [
     '--intro-copy','--intro-copy-y','--intro-scrim','--intro-progress','--intro-caption-opacity',
-    '--backplate-opacity','--backplate-scale','--threshold-opacity','--threshold-scale','--threshold-split',
-    '--threshold-shadow','--photo-interior-opacity','--photo-interior-scale','--photo-interior-x',
-    '--photo-outdoor-opacity','--photo-outdoor-scale','--photo-outdoor-y','--photo-community-opacity',
-    '--photo-community-scale','--curtain-y','--curtain-opacity','--handoff-mark-opacity',
+    '--backplate-opacity','--backplate-scale','--threshold-opacity','--threshold-scale',
+    '--threshold-left-x','--threshold-right-x','--threshold-shadow','--photo-interior-opacity',
+    '--photo-interior-scale','--photo-interior-x','--photo-outdoor-opacity','--photo-outdoor-scale',
+    '--photo-outdoor-y','--photo-community-opacity','--photo-community-scale','--curtain-y',
+    '--curtain-opacity','--handoff-mark-opacity',
   ]
 
   const dispose = () => {
@@ -62,7 +63,8 @@ export function createPhotoExperience(section: HTMLElement, signal: AbortSignal)
     const split = range(progress, .27, .47)
     section.style.setProperty('--threshold-opacity', thresholdOpacity.toFixed(4))
     section.style.setProperty('--threshold-scale', mix(1.075, 1, thresholdIn).toFixed(4))
-    section.style.setProperty('--threshold-split', split.toFixed(4))
+    section.style.setProperty('--threshold-left-x', `${mix(0, -104, split).toFixed(2)}%`)
+    section.style.setProperty('--threshold-right-x', `${mix(0, 104, split).toFixed(2)}%`)
     section.style.setProperty('--threshold-shadow', mix(0, .42, split).toFixed(3))
 
     const interiorIn = range(progress, .24, .39)
