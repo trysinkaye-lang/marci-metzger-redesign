@@ -1,36 +1,94 @@
 /*
- * Visual cleanup pass
- * -------------------
- * Keeps the strongest editorial ideas while removing decorative layers that made
- * the page feel busy. The goal is simpler hierarchy, more breathing room, and a
- * clearer luxury-real-estate rhythm.
+ * Final visual cleanup pass
+ * -------------------------
+ * The page should feel premium because of photography, hierarchy and whitespace,
+ * not because every section is doing something different.
  */
 
 body {
   background: var(--editorial-cream);
 }
 
-/* Hero: keep the large typography, remove extra framing/details. */
+.section {
+  padding-block: clamp(5rem, 8vw, 8rem);
+}
+
+.section-heading {
+  margin-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+.section-heading h2 {
+  font-size: clamp(3rem, 4.8vw, 5rem);
+  line-height: .94;
+}
+
+/* Hero — one strong photograph, one strong headline, fewer competing details. */
 .hero-editorial::after,
 .hero-kicker-row::before {
   display: none;
 }
 
 .hero-kicker-row {
-  border-bottom-color: rgb(255 255 255 / 22%);
+  justify-content: flex-end;
+  padding-bottom: .75rem;
+  border-bottom: 0;
+}
+
+.hero-kicker-row .eyebrow {
+  display: none;
+}
+
+.hero-location {
+  color: rgb(255 255 255 / 78%);
 }
 
 .hero-editorial h1 {
+  font-size: clamp(4.8rem, 9vw, 8.8rem);
+  line-height: .78;
   text-shadow: none;
 }
 
-/* Results: still overlaps, but behaves like a quiet fact panel. */
+.hero-editorial .hero-copy {
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
+}
+
+.hero-bottom-rail {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+}
+
+.hero-scroll-link {
+  display: none;
+}
+
+.hero-bottom-rail .hero-actions {
+  justify-self: end;
+}
+
+/* Proven Results — no floating card treatment. */
 .performance-section {
-  margin-top: -1.25rem;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid var(--editorial-line);
+  background: var(--editorial-paper);
   box-shadow: none;
 }
 
-/* Remove decorative typography and section numbering. */
+.performance-section > .container {
+  width: min(100% - var(--content-gutter) * 2, 90rem);
+  padding: clamp(2.75rem, 4vw, 4.5rem) 0;
+}
+
+.performance-intro h2 {
+  font-size: clamp(2.1rem, 3vw, 3.25rem);
+}
+
+.performance-metrics dd {
+  font-size: clamp(2.55rem, 3.7vw, 4rem);
+}
+
+/* Remove decorative words, numbering and badges. */
 .about-layout::before,
 .about-copy::before,
 .seller-cinematic .seller-copy::before,
@@ -42,30 +100,42 @@ body {
   display: none;
 }
 
-/* About: calm two-column editorial profile. */
+/* About — calm editorial profile. */
 .about-section {
   padding-top: clamp(6rem, 9vw, 9rem);
 }
 
 .about-copy h2 {
-  font-size: clamp(3.7rem, 6vw, 6.2rem);
-  line-height: .86;
+  font-size: clamp(3.5rem, 5.6vw, 5.8rem);
+  line-height: .88;
+}
+
+.about-copy .lead {
+  max-width: 20ch;
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
 }
 
 .affiliation-strip {
   margin-top: clamp(3rem, 5vw, 5rem);
 }
 
-/* Search: keep the image-led layout without grid-breaking or overlap. */
+/* Search — large photo, then a tidy functional strip. */
 .search-story {
   width: 100%;
+  min-height: clamp(27rem, 48vw, 38rem);
   margin-left: 0;
   transform: none;
   box-shadow: none;
 }
 
+.search-story-copy h2 {
+  max-width: 9ch;
+  font-size: clamp(3.4rem, 5.7vw, 5.8rem);
+}
+
 .search-panel {
   margin-top: 0;
+  padding: clamp(1.75rem, 3vw, 2.75rem);
   box-shadow: none;
 }
 
@@ -78,16 +148,30 @@ body {
 }
 
 .search-fields label {
+  min-height: 5.75rem;
   border-right: 1px solid var(--editorial-line);
   border-bottom: 1px solid var(--editorial-line);
 }
 
-/* Seller: keep one full-bleed dramatic section, remove vertical signature. */
+/* Seller — keep this as the strongest full-bleed moment after the hero. */
+.seller-cinematic {
+  min-height: clamp(34rem, 64svh, 46rem);
+}
+
+.seller-cinematic .seller-layout {
+  min-height: clamp(34rem, 64svh, 46rem);
+}
+
+.seller-cinematic .seller-copy h2 {
+  font-size: clamp(3.8rem, 6.2vw, 6.3rem);
+  line-height: .82;
+}
+
 .seller-signature {
   display: none;
 }
 
-/* Buyer: remove forced offsets and let the photography breathe. */
+/* Buyer — clean two-column composition, no forced offsets. */
 .buyer-images,
 .buyer-copy {
   transform: none;
@@ -97,7 +181,73 @@ body {
   box-shadow: 0 12px 32px rgb(42 39 34 / 12%);
 }
 
-/* Services: alternate large stories rather than sticky side-by-side scrolling. */
+.buyer-copy h2 {
+  font-size: clamp(3.4rem, 5.3vw, 5.5rem);
+  line-height: .88;
+}
+
+/* Depth Carousel — preserve depth effect; arrows sit BESIDE the picture stack. */
+.depth-carousel-overlay-controls {
+  display: none;
+}
+
+.depth-carousel-stage {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr) 3.25rem;
+  gap: clamp(.8rem, 2vw, 1.75rem);
+  align-items: center;
+}
+
+.depth-carousel-rail {
+  grid-column: 2;
+  width: 100%;
+  isolation: isolate;
+}
+
+.depth-carousel-side-arrow {
+  position: relative;
+  z-index: 40;
+  display: inline-grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 38%);
+  border-radius: 50%;
+  background: transparent;
+  color: #f7f3eb;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.depth-carousel-side-arrow-previous {
+  grid-column: 1;
+}
+
+.depth-carousel-side-arrow-next {
+  grid-column: 3;
+}
+
+.depth-carousel-side-arrow:hover,
+.depth-carousel-side-arrow:focus-visible {
+  border-color: #f7f3eb;
+  background: #f7f3eb;
+  color: #191918;
+  transform: scale(1.04);
+}
+
+.depth-carousel-meta {
+  grid-template-columns: 6rem minmax(0, 1fr);
+  max-width: 54rem;
+  margin-inline: auto;
+}
+
+.depth-carousel-copy h3 {
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+/* Services — large alternating stories, but no sticky or experimental layout. */
 @media (min-width: 64rem) {
   .services-section > .container {
     display: block;
@@ -125,10 +275,10 @@ body {
   .service-row,
   .service-row:nth-child(even) {
     display: grid;
-    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-    gap: clamp(2.5rem, 5vw, 6rem);
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(2.5rem, 5vw, 5.5rem);
     align-items: center;
-    padding-block: clamp(3.5rem, 6vw, 6rem);
+    padding-block: clamp(3.5rem, 5vw, 5.5rem);
     margin-bottom: 0;
     border-bottom: 1px solid var(--editorial-line);
   }
@@ -154,63 +304,32 @@ body {
   }
 }
 
-/* Gallery: arrows live directly on the active image. */
-.depth-carousel-rail {
-  isolation: isolate;
-}
-
-.depth-carousel-overlay-controls {
-  position: absolute;
-  z-index: 30;
-  top: 50%;
-  left: 50%;
-  width: min(69vw, 47rem);
-  display: flex;
-  justify-content: space-between;
-  padding-inline: 1rem;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.depth-carousel-arrow {
-  display: inline-grid;
-  width: 3.15rem;
-  height: 3.15rem;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 52%);
-  border-radius: 50%;
-  background: rgb(16 17 15 / 38%);
-  color: #ffffff;
-  font-size: 1.15rem;
-  line-height: 1;
-  cursor: pointer;
-  pointer-events: auto;
-  backdrop-filter: blur(8px);
-  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
-}
-
-.depth-carousel-arrow:hover,
-.depth-carousel-arrow:focus-visible {
-  border-color: #f7f3eb;
-  background: #f7f3eb;
-  color: #191918;
-  transform: scale(1.04);
-}
-
-.depth-carousel-meta {
-  grid-template-columns: 7rem minmax(0, 1fr);
-  max-width: 58rem;
-  margin-inline: auto;
-}
-
-/* Contact: keep the dark finish, remove giant watermark. */
+/* Contact — quiet dark ending, no watermark. */
 .contact-section {
   overflow: visible;
 }
 
+.contact-heading h2 {
+  font-size: clamp(3.6rem, 5.8vw, 6rem);
+}
+
 @media (max-width: 63.999rem) {
-  .depth-carousel-overlay-controls {
-    width: min(69vw, 47rem);
+  .hero-bottom-rail {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-bottom-rail .hero-actions {
+    justify-self: start;
+  }
+
+  .depth-carousel-stage {
+    grid-template-columns: 3rem minmax(0, 1fr) 3rem;
+    gap: .75rem;
+  }
+
+  .depth-carousel-side-arrow {
+    width: 3rem;
+    height: 3rem;
   }
 
   .depth-carousel-meta {
@@ -219,8 +338,24 @@ body {
 }
 
 @media (max-width: 47.999rem) {
-  .performance-section {
-    margin-top: 0;
+  .section {
+    padding-block: 4.5rem;
+  }
+
+  .hero-kicker-row {
+    justify-content: flex-start;
+  }
+
+  .hero-location {
+    text-align: left;
+  }
+
+  .hero-editorial h1 {
+    font-size: clamp(4rem, 17vw, 5.7rem);
+  }
+
+  .hero-bottom-rail {
+    gap: 1rem;
   }
 
   .search-story-copy {
@@ -231,15 +366,16 @@ body {
     justify-self: start;
   }
 
-  .depth-carousel-overlay-controls {
-    width: min(100%, 34rem);
-    padding-inline: .75rem;
+  .depth-carousel-stage {
+    grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    gap: .45rem;
   }
 
-  .depth-carousel-arrow {
+  .depth-carousel-side-arrow {
     width: 2.75rem;
     height: 2.75rem;
-    background: rgb(16 17 15 / 52%);
+    border-color: rgb(255 255 255 / 48%);
+    background: rgb(255 255 255 / 4%);
   }
 
   .depth-carousel-meta {
@@ -250,10 +386,19 @@ body {
   .depth-carousel-copy {
     grid-column: 1;
   }
+
+  .services-heading {
+    display: block;
+  }
+
+  .services-heading .section-note {
+    margin-top: 1rem;
+    text-align: left;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .depth-carousel-arrow {
+  .depth-carousel-side-arrow {
     transition: none;
   }
 }
