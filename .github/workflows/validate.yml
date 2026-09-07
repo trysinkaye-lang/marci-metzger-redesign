@@ -1,9 +1,10 @@
-name: Validate Phase 3
+name: Validate redesign
 
 on:
   push:
     branches:
       - feature/phase3-reference-3d
+      - feature/2026-elegant-redesign
     paths:
       - 'src/**'
       - 'public/**'
