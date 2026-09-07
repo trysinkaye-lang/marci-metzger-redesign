@@ -2,6 +2,8 @@ import { siteContent } from '../../data/siteContent'
 import { Container } from '../layout/Container'
 import { Button } from '../ui/Button'
 
+const mapEmbedUrl = 'https://www.google.com/maps?q=3190+HW-160,+Suite+F,+Pahrump,+Nevada+89048&output=embed'
+
 export function Contact() {
   const content = siteContent.contact
   return (
@@ -9,7 +11,7 @@ export function Contact() {
       <Container>
         <div className="contact-heading stack">
           <p className="eyebrow">Ready to make a move?</p>
-          <h2 id="contact-heading">Let's talk about<br />what comes next.</h2>
+          <h2 id="contact-heading">Let&apos;s talk about<br />what comes next.</h2>
         </div>
         <div className="contact-layout">
           <div className="contact-details">
@@ -43,6 +45,27 @@ export function Contact() {
                 <Button disabled aria-describedby="contact-status">Send<span aria-hidden="true">↗</span></Button>
               </div>
             </form>
+          </div>
+        </div>
+
+        <div className="contact-map-block" aria-label="Marci Metzger office location">
+          <div className="contact-map-heading">
+            <div>
+              <p className="eyebrow">Pahrump office</p>
+              <p className="contact-map-address">3190 HW-160, Suite F · Pahrump, Nevada 89048</p>
+            </div>
+            <a className="text-link contact-map-link" href={content.directionsHref} target="_blank" rel="noreferrer">
+              {content.directionsLabel}<span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div className="contact-map-frame">
+            <iframe
+              src={mapEmbedUrl}
+              title="Map showing Marci Metzger - The Ridge Realty Group office in Pahrump, Nevada"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
         </div>
       </Container>
