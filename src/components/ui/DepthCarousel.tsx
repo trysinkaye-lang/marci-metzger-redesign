@@ -112,6 +112,35 @@ export function DepthCarousel({ items }: DepthCarouselProps) {
               </button>
             )
           })}
+
+          <div className="depth-carousel-overlay-controls" aria-label="Gallery controls">
+            <button
+              type="button"
+              className="depth-carousel-arrow depth-carousel-arrow-previous"
+              onPointerDown={(event) => event.stopPropagation()}
+              onPointerUp={(event) => event.stopPropagation()}
+              onClick={(event) => {
+                event.stopPropagation()
+                goPrevious()
+              }}
+              aria-label="Previous image"
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+            <button
+              type="button"
+              className="depth-carousel-arrow depth-carousel-arrow-next"
+              onPointerDown={(event) => event.stopPropagation()}
+              onPointerUp={(event) => event.stopPropagation()}
+              onClick={(event) => {
+                event.stopPropagation()
+                goNext()
+              }}
+              aria-label="Next image"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -125,10 +154,6 @@ export function DepthCarousel({ items }: DepthCarouselProps) {
           <p className="eyebrow">Photo Gallery</p>
           <h3>{activeItem.title}</h3>
           <p>{activeItem.description}</p>
-        </div>
-        <div className="depth-carousel-controls" aria-label="Gallery controls">
-          <button type="button" onClick={goPrevious} aria-label="Previous image">←</button>
-          <button type="button" onClick={goNext} aria-label="Next image">→</button>
         </div>
       </div>
     </div>
