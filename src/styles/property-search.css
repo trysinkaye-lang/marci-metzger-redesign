@@ -1,0 +1,243 @@
+/* Property search — self-contained final composition.
+   This file intentionally loads last so earlier editorial experiments cannot
+   pull the image copy outside the visible panel. */
+
+.search-section {
+  overflow: hidden;
+  background: #fbfaf7;
+}
+
+.search-section > .container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(26rem, .94fr);
+  width: min(100% - var(--content-gutter) * 2, 90rem);
+  margin-inline: auto;
+  align-items: stretch;
+}
+
+.search-story {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: clamp(38rem, 54vw, 47rem);
+  margin: 0;
+  overflow: hidden;
+  background: #272822;
+  box-shadow: none;
+  transform: none;
+}
+
+.search-story > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.search-story-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 38%, rgb(14 15 13 / 18%) 58%, rgb(14 15 13 / 72%) 100%),
+    linear-gradient(90deg, rgb(14 15 13 / 18%) 0%, transparent 50%);
+}
+
+.search-story-copy {
+  position: absolute;
+  z-index: 2;
+  inset: auto clamp(1.75rem, 3vw, 3rem) clamp(1.75rem, 3vw, 3rem);
+  display: block;
+  width: auto;
+  max-width: 34rem;
+  margin: 0;
+  padding: 0;
+  transform: none;
+  color: #fff;
+}
+
+.search-story-copy .eyebrow {
+  margin: 0 0 .9rem;
+  color: rgb(255 255 255 / 74%);
+}
+
+.search-story-copy h2 {
+  max-width: 8ch;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(3.6rem, 5.2vw, 5.75rem);
+  line-height: .84;
+  letter-spacing: -.045em;
+}
+
+.search-story-note {
+  justify-self: auto;
+  margin: 1rem 0 0;
+  color: rgb(255 255 255 / 78%);
+  font-size: .72rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.search-panel {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: clamp(2.25rem, 3.5vw, 3.5rem);
+  border: 1px solid var(--editorial-line);
+  border-left: 0;
+  background: #f8f5ee;
+  box-shadow: none;
+}
+
+.search-panel-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 0 0 1.6rem;
+  padding: 0 0 1.4rem;
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+.search-panel-heading .eyebrow {
+  margin: 0 0 .55rem;
+}
+
+.search-panel-heading h3 {
+  margin: 0;
+  font-size: clamp(2rem, 2.8vw, 2.75rem);
+  line-height: .95;
+}
+
+.search-panel fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.search-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+  padding: 0;
+  border-top: 1px solid var(--editorial-line);
+  border-left: 1px solid var(--editorial-line);
+  background: transparent;
+}
+
+.search-fields label {
+  display: grid;
+  min-width: 0;
+  min-height: 5.55rem;
+  align-content: center;
+  gap: .45rem;
+  margin: 0;
+  padding: .9rem 1rem;
+  border-right: 1px solid var(--editorial-line);
+  border-bottom: 1px solid var(--editorial-line);
+  background: transparent;
+  color: #8a7969;
+  font-size: .62rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.search-fields label:first-child {
+  grid-column: 1 / -1;
+}
+
+.search-fields label:nth-child(7) {
+  grid-column: auto;
+}
+
+.search-fields select,
+.search-fields input {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #332f2b;
+  font: inherit;
+  font-size: .9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.search-footer {
+  display: grid;
+  gap: 1.35rem;
+  margin-top: 1.6rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--editorial-line);
+}
+
+.search-footer .section-note {
+  max-width: 48ch;
+  margin: 0;
+}
+
+.search-footer .button {
+  justify-self: start;
+  min-width: 12rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 68rem) {
+  .search-section > .container {
+    grid-template-columns: 1fr;
+  }
+
+  .search-story {
+    min-height: clamp(28rem, 66vw, 38rem);
+  }
+
+  .search-panel {
+    border-top: 0;
+    border-left: 1px solid var(--editorial-line);
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .search-section > .container {
+    width: min(100% - 2rem, 90rem);
+  }
+
+  .search-story {
+    min-height: 30rem;
+  }
+
+  .search-story-copy {
+    inset: auto 1.25rem 1.4rem;
+  }
+
+  .search-story-copy h2 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+
+  .search-panel {
+    padding: 1.6rem 1.25rem 1.8rem;
+  }
+
+  .search-panel-heading {
+    align-items: start;
+  }
+
+  .search-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .search-fields label,
+  .search-fields label:first-child,
+  .search-fields label:nth-child(7) {
+    grid-column: 1;
+  }
+}

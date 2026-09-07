@@ -1,0 +1,358 @@
+/*
+ * Services cinematic rail
+ * ----------------------
+ * A full-viewport horizontal story inspired by current luxury real-estate,
+ * hospitality and Awwwards-style scroll galleries. Motion is scroll-driven,
+ * restrained and fully reversible. Mobile falls back to a normal vertical flow.
+ */
+
+.services-cinema {
+  position: relative;
+  overflow: clip;
+  background: #171a17;
+  color: #f5f0e8;
+}
+
+.services-cinema-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(17rem, .45fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: end;
+  padding-top: clamp(5rem, 8vw, 8rem);
+  padding-bottom: clamp(3.5rem, 6vw, 6rem);
+}
+
+.services-cinema-intro .eyebrow {
+  margin: 0 0 1rem;
+  color: #c8ad92;
+}
+
+.services-cinema-intro h2 {
+  max-width: 8ch;
+  margin: 0;
+  font-size: clamp(4.8rem, 9vw, 9rem);
+  font-weight: 400;
+  line-height: .76;
+  letter-spacing: -.06em;
+}
+
+.services-cinema-intro-copy {
+  align-self: end;
+  padding-bottom: .35rem;
+}
+
+.services-cinema-intro-copy p {
+  max-width: 30ch;
+  margin: 0;
+  color: rgb(245 240 232 / 68%);
+  font-size: clamp(.95rem, 1.1vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.services-cinema-intro-copy span {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #c8ad92;
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.services-cinema-stage {
+  position: relative;
+  height: 300svh;
+}
+
+.services-cinema-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: #171a17;
+}
+
+.services-cinema-progress {
+  position: absolute;
+  z-index: 4;
+  top: clamp(1.2rem, 2vw, 2rem);
+  right: max(var(--content-gutter), 3vw);
+  left: max(var(--content-gutter), 3vw);
+  display: grid;
+  grid-template-columns: auto minmax(5rem, 12rem) auto;
+  gap: .85rem;
+  align-items: center;
+  color: rgb(245 240 232 / 76%);
+  font-size: .6rem;
+  letter-spacing: .14em;
+}
+
+.services-cinema-progress-track {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 24%);
+}
+
+.services-cinema-progress-fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: #f0dfcc;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.services-cinema-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+
+.service-scene {
+  position: relative;
+  display: grid;
+  width: 100vw;
+  height: 100svh;
+  grid-template-columns: minmax(0, 1.45fr) minmax(26rem, .72fr);
+  background: #eee8de;
+  color: #181816;
+}
+
+.service-scene:nth-child(even) {
+  grid-template-columns: minmax(26rem, .72fr) minmax(0, 1.45fr);
+}
+
+.service-scene:nth-child(even) .service-scene-media {
+  order: 2;
+}
+
+.service-scene:nth-child(even) .service-scene-copy {
+  order: 1;
+}
+
+.service-scene-media {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  background: #2b2e2a;
+}
+
+.service-scene-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 58%, rgb(10 12 10 / 15%) 100%);
+}
+
+.service-scene-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.055);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.service-scene-copy {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(4.7rem, 7vw, 7rem) clamp(2.25rem, 4.4vw, 4.8rem) clamp(2.2rem, 3vw, 3rem);
+  border-left: 1px solid rgb(27 27 25 / 13%);
+  background: #f7f2e9;
+  opacity: 1 !important;
+}
+
+.service-scene:nth-child(even) .service-scene-copy {
+  border-right: 1px solid rgb(27 27 25 / 13%);
+  border-left: 0;
+}
+
+.service-scene-meta,
+.service-scene-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  color: #6f6052;
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.service-scene-meta {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(27 27 25 / 16%);
+}
+
+.service-scene-body {
+  align-self: center;
+  max-width: 38rem;
+}
+
+.service-scene-body .eyebrow {
+  margin: 0 0 1rem;
+  color: #806852;
+  font-weight: 600;
+}
+
+.service-scene-body h3 {
+  max-width: 8ch;
+  margin: 0;
+  color: #1d1c19;
+  font-family: var(--font-display);
+  font-size: clamp(3.6rem, 5.6vw, 6.2rem);
+  font-weight: 400;
+  line-height: .82;
+  letter-spacing: -.052em;
+}
+
+.service-scene-body > p:last-child {
+  max-width: 42ch;
+  margin: clamp(1.6rem, 2.7vw, 2.7rem) 0 0;
+  color: #514a43;
+  font-size: clamp(1rem, 1.06vw, 1.1rem);
+  line-height: 1.72;
+}
+
+.service-scene-footer {
+  align-self: end;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(27 27 25 / 16%);
+  color: #62584f;
+}
+
+@media (max-width: 63.999rem) {
+  .services-cinema-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .services-cinema-intro h2 {
+    font-size: clamp(4.5rem, 11vw, 7rem);
+  }
+
+  .service-scene,
+  .service-scene:nth-child(even) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr);
+  }
+
+  .service-scene-copy {
+    padding-inline: clamp(1.8rem, 3.5vw, 3rem);
+  }
+
+  .service-scene-body h3 {
+    font-size: clamp(3.2rem, 6.2vw, 4.9rem);
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .services-cinema {
+    overflow: hidden;
+  }
+
+  .services-cinema-intro {
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .services-cinema-intro h2 {
+    font-size: clamp(4rem, 18vw, 5.7rem);
+  }
+
+  .services-cinema-intro-copy span {
+    display: none;
+  }
+
+  .services-cinema-stage {
+    height: auto;
+  }
+
+  .services-cinema-pin {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .services-cinema-progress {
+    display: none;
+  }
+
+  .services-cinema-track {
+    display: grid;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .service-scene,
+  .service-scene:nth-child(even) {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .service-scene:nth-child(even) .service-scene-media,
+  .service-scene:nth-child(even) .service-scene-copy {
+    order: initial;
+  }
+
+  .service-scene-media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .service-scene-copy,
+  .service-scene:nth-child(even) .service-scene-copy {
+    min-height: 31rem;
+    padding: 2rem 1.35rem 1.5rem;
+    border: 0;
+  }
+
+  .service-scene-body h3 {
+    font-size: clamp(3.1rem, 14vw, 4.4rem);
+  }
+
+  .service-scene + .service-scene {
+    border-top: 1px solid rgb(27 27 25 / 13%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-cinema-stage {
+    height: auto;
+  }
+
+  .services-cinema-pin {
+    position: relative;
+    height: auto;
+  }
+
+  .services-cinema-progress {
+    display: none;
+  }
+
+  .services-cinema-track {
+    display: grid;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .service-scene,
+  .service-scene:nth-child(even) {
+    width: 100%;
+    height: auto;
+    min-height: 70svh;
+  }
+
+  .service-scene-media img {
+    transform: none !important;
+  }
+}

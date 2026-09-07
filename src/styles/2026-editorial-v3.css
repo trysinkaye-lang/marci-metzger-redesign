@@ -1,0 +1,525 @@
+/*
+ * 2026 editorial composition pass
+ * --------------------------------
+ * Inspired by current luxury real-estate and editorial craft patterns:
+ * local identity, anti-grid composition, large type, image-led storytelling,
+ * restrained depth, purposeful motion, and accessible hierarchy.
+ * The Depth Carousel is intentionally untouched in this file.
+ */
+
+body {
+  background:
+    radial-gradient(circle at 18% 12%, rgb(139 119 98 / 5%), transparent 24rem),
+    var(--editorial-cream);
+}
+
+/* Hero: a framed editorial cover rather than a standard banner. */
+.hero-editorial {
+  isolation: isolate;
+}
+
+.hero-editorial::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 1rem;
+  border: 1px solid rgb(255 255 255 / 22%);
+  pointer-events: none;
+}
+
+.hero-editorial .hero-image {
+  animation: none;
+  will-change: transform;
+}
+
+.hero-kicker-row {
+  position: relative;
+  z-index: 3;
+}
+
+.hero-kicker-row::before {
+  content: '';
+  width: 2.25rem;
+  height: 1px;
+  margin-right: .8rem;
+  flex: 0 0 auto;
+  background: rgb(255 255 255 / 48%);
+}
+
+.hero-kicker-row .eyebrow {
+  margin-right: auto;
+}
+
+.hero-editorial h1 {
+  position: relative;
+  z-index: 3;
+  text-shadow: 0 1px 18px rgb(0 0 0 / 11%);
+}
+
+.hero-editorial h1 span:last-child {
+  color: #e7dbca;
+}
+
+.hero-bottom-rail {
+  position: relative;
+  z-index: 3;
+}
+
+/* Results: quieter object, stronger numbers. */
+.performance-section {
+  box-shadow: 0 28px 80px rgb(47 42 35 / 9%);
+}
+
+.performance-metrics > div {
+  min-width: 0;
+}
+
+.performance-metrics dd {
+  overflow: hidden;
+}
+
+.performance-metrics dt {
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Local identity interlude — intentionally typographic, not another card. */
+.local-interlude {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(5rem, 9vw, 9rem) 0 clamp(3rem, 5vw, 5rem);
+  background: var(--editorial-cream);
+}
+
+.local-interlude::before,
+.local-interlude::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--editorial-line);
+}
+
+.local-interlude::before { top: clamp(3rem, 5vw, 5rem); }
+.local-interlude::after { bottom: 0; }
+
+.local-interlude-words {
+  width: min(100% - clamp(1.25rem, 4vw, 4rem) * 2, 98rem);
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0 clamp(1.1rem, 2.2vw, 2.8rem);
+  color: #25231f;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 9.4vw, 10.5rem);
+  line-height: .72;
+  letter-spacing: -.055em;
+  text-transform: none;
+}
+
+.local-interlude-words em {
+  color: #8a7968;
+  font-weight: 400;
+}
+
+.local-interlude-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(2.25rem, 4vw, 4rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--editorial-line);
+  color: #6d655c;
+  font-size: .68rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.local-interlude-meta p {
+  max-width: none;
+}
+
+/* About: editorial profile with an oversized typographic field. */
+.about-layout {
+  position: relative;
+  isolation: isolate;
+}
+
+.about-layout::before {
+  content: 'MARCI';
+  position: absolute;
+  z-index: -1;
+  top: -1.9rem;
+  left: 39%;
+  color: rgb(121 103 83 / 8%);
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 14vw, 15rem);
+  line-height: .75;
+  letter-spacing: -.06em;
+  pointer-events: none;
+}
+
+.portrait-frame {
+  overflow: visible;
+}
+
+.portrait-frame img {
+  will-change: clip-path, transform;
+}
+
+.about-copy {
+  position: relative;
+}
+
+.about-copy::before {
+  content: '01';
+  position: absolute;
+  top: -.15rem;
+  right: 0;
+  color: var(--editorial-warm);
+  font-size: .68rem;
+  letter-spacing: .14em;
+}
+
+.about-copy > p:not(.eyebrow, .lead) {
+  max-width: 48ch;
+}
+
+/* Search: allow the photography to break the grid, then keep controls calm. */
+.search-story {
+  width: min(calc(100vw - 2rem), 98rem);
+  margin-left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 34px 90px rgb(45 39 33 / 12%);
+}
+
+.search-story > img {
+  will-change: transform;
+}
+
+.search-story-copy h2 {
+  text-shadow: 0 2px 25px rgb(0 0 0 / 18%);
+}
+
+.search-panel {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(-2.2rem, -2vw, -1.1rem);
+  box-shadow: 0 22px 56px rgb(62 53 43 / 7%);
+}
+
+.search-fields {
+  gap: 1px;
+  padding: 1px;
+  background: var(--editorial-line);
+}
+
+.search-fields label {
+  min-height: 6.5rem;
+  padding: 1rem 1.1rem;
+  background: #fbfaf7;
+  color: #6d655c;
+  font-size: .67rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.search-fields input,
+.search-fields select {
+  min-height: 2.5rem;
+  margin-top: .5rem;
+  padding: .3rem 0 0;
+  border-bottom: 0;
+  color: #25231f;
+  font-size: .9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.search-panel fieldset:disabled {
+  opacity: 1;
+}
+
+/* Seller: strengthen the cinematic pause without adding another effect. */
+.seller-cinematic {
+  border-top: 1px solid #30312d;
+  border-bottom: 1px solid #30312d;
+}
+
+.seller-media img {
+  will-change: transform;
+}
+
+.seller-cinematic .seller-copy {
+  position: relative;
+}
+
+.seller-cinematic .seller-copy::before {
+  content: '02';
+  display: block;
+  margin-bottom: 2rem;
+  color: #c7b69f;
+  font-size: .68rem;
+  letter-spacing: .15em;
+}
+
+.seller-cinematic .seller-copy h2 {
+  text-wrap: balance;
+}
+
+.seller-signature {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  align-self: center;
+  padding-bottom: 0;
+}
+
+/* Buyer: organic, offset composition instead of a perfect two-column grid. */
+.buyer-layout {
+  position: relative;
+}
+
+.buyer-layout::before {
+  content: '03';
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--editorial-warm);
+  font-size: .68rem;
+  letter-spacing: .15em;
+}
+
+.buyer-images {
+  transform: translateX(-2.5%);
+}
+
+.buyer-property,
+.buyer-detail {
+  will-change: transform, opacity;
+}
+
+.buyer-copy {
+  transform: translateY(8%);
+}
+
+.buyer-copy .eyebrow {
+  color: var(--editorial-warm);
+}
+
+/* Services: sticky editorial index on desktop; stories scroll beside it. */
+.services-section {
+  position: relative;
+}
+
+.services-heading::before {
+  content: '04';
+  display: block;
+  margin-bottom: 1.2rem;
+  color: var(--editorial-warm);
+  font-size: .68rem;
+  letter-spacing: .15em;
+}
+
+.service-media {
+  will-change: clip-path, opacity;
+}
+
+.service-copy {
+  will-change: transform, opacity;
+}
+
+/* Contact: turn the end of the page into a brand statement. */
+.contact-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-section::before {
+  content: 'PAHRUMP';
+  position: absolute;
+  right: -1.5vw;
+  bottom: -2.5rem;
+  color: rgb(255 255 255 / 3.5%);
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 19vw, 20rem);
+  line-height: .72;
+  letter-spacing: -.065em;
+  pointer-events: none;
+}
+
+.contact-heading,
+.contact-layout {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-heading::before {
+  content: '05';
+  display: block;
+  margin-bottom: 1.4rem;
+  color: #bdb5a9;
+  font-size: .68rem;
+  letter-spacing: .15em;
+}
+
+.contact-phone {
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.contact-phone:hover {
+  color: #d8c3aa;
+  transform: translateX(.18rem);
+}
+
+@media (min-width: 64rem) {
+  .services-section > .container {
+    display: grid;
+    grid-template-columns: minmax(15rem, .62fr) minmax(0, 1.38fr);
+    gap: clamp(3.5rem, 7vw, 8rem);
+    align-items: start;
+  }
+
+  .services-heading {
+    position: sticky;
+    top: 7rem;
+    display: block;
+    margin: 0;
+  }
+
+  .services-heading .section-note {
+    max-width: 30ch;
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .service-list {
+    border-top: 0;
+  }
+
+  .service-row,
+  .service-row:nth-child(even) {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+    padding: 0 0 clamp(4rem, 7vw, 7rem);
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+    border-bottom: 1px solid var(--editorial-line);
+  }
+
+  .service-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .service-row .service-copy,
+  .service-row:nth-child(even) .service-copy,
+  .service-row .service-media,
+  .service-row:nth-child(even) .service-media {
+    order: initial;
+  }
+
+  .service-media img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .service-copy h3 {
+    max-width: 13ch;
+  }
+}
+
+@media (max-width: 63.999rem) {
+  .hero-editorial::after {
+    inset: .65rem;
+  }
+
+  .local-interlude-words {
+    justify-content: flex-start;
+    font-size: clamp(3.7rem, 13vw, 7.5rem);
+  }
+
+  .about-layout::before {
+    left: 28%;
+  }
+
+  .seller-signature {
+    display: none;
+  }
+
+  .buyer-images,
+  .buyer-copy {
+    transform: none;
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .hero-editorial::after {
+    display: none;
+  }
+
+  .hero-kicker-row::before {
+    display: none;
+  }
+
+  .local-interlude {
+    padding-top: 4rem;
+  }
+
+  .local-interlude-words {
+    display: grid;
+    gap: .15rem;
+    font-size: clamp(3.8rem, 18vw, 6.4rem);
+  }
+
+  .local-interlude-words em {
+    padding-left: 12vw;
+  }
+
+  .local-interlude-meta {
+    display: grid;
+    gap: .7rem;
+  }
+
+  .about-layout::before,
+  .about-copy::before,
+  .buyer-layout::before {
+    display: none;
+  }
+
+  .search-story {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .search-panel {
+    margin-top: 0;
+    box-shadow: none;
+  }
+
+  .search-fields label {
+    min-height: 5.75rem;
+  }
+
+  .contact-section::before {
+    bottom: -1rem;
+    font-size: 30vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-editorial .hero-image,
+  .search-story > img,
+  .seller-media img,
+  .buyer-property,
+  .buyer-detail,
+  .service-media,
+  .service-copy {
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+}

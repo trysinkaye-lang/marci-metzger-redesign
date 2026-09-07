@@ -1,0 +1,319 @@
+/*
+ * Responsive quiet-luxury navigation
+ * ----------------------------------
+ * Desktop uses a conventional, restrained navbar so navigation is immediately
+ * visible. The burger menu is reserved for mobile, where it opens a compact
+ * text-only panel with subtle motion and no decorative imagery.
+ */
+
+.minimal-header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 90;
+  color: #fff;
+}
+
+.minimal-header-bar {
+  position: relative;
+  z-index: 5;
+  min-height: 5.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 1px solid rgb(255 255 255 / 20%);
+}
+
+.minimal-brand {
+  width: clamp(8.25rem, 10vw, 9.5rem);
+  max-width: 42vw;
+  padding-block: .85rem;
+  flex: 0 0 auto;
+}
+
+.minimal-brand img {
+  display: block;
+  width: 100%;
+  filter: brightness(0) invert(1);
+}
+
+/* Desktop navigation */
+.desktop-navigation {
+  margin-left: auto;
+}
+
+.desktop-navigation ul {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 2.5vw, 2.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.desktop-navigation a {
+  position: relative;
+  display: inline-block;
+  padding-block: .55rem;
+  color: rgb(255 255 255 / 88%);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 220ms ease;
+}
+
+.desktop-navigation a::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: .2rem;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 320ms cubic-bezier(.22, 1, .36, 1);
+}
+
+.desktop-navigation a:hover,
+.desktop-navigation a:focus-visible {
+  color: #fff;
+}
+
+.desktop-navigation a:hover::after,
+.desktop-navigation a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Mobile menu control is hidden on desktop. */
+.minimal-menu-toggle,
+.minimal-menu-panel {
+  display: none;
+}
+
+@media (max-width: 47.999rem) {
+  .minimal-header-bar {
+    min-height: 4.6rem;
+    gap: 1rem;
+  }
+
+  .minimal-brand {
+    width: 8.5rem;
+    padding-block: .75rem;
+  }
+
+  .desktop-navigation {
+    display: none;
+  }
+
+  .minimal-menu-toggle {
+    position: relative;
+    z-index: 8;
+    display: inline-flex;
+    align-items: center;
+    gap: .72rem;
+    min-height: 2.6rem;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: .66rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .minimal-menu-icon {
+    position: relative;
+    display: grid;
+    width: 1.45rem;
+    gap: 5px;
+  }
+
+  .minimal-menu-icon > span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform-origin: center;
+    transition: transform 320ms cubic-bezier(.22, 1, .36, 1), width 260ms ease;
+  }
+
+  .minimal-menu-icon > span:last-child {
+    width: 68%;
+    justify-self: end;
+  }
+
+  .minimal-menu-toggle[aria-expanded='true'] .minimal-menu-icon {
+    gap: 0;
+  }
+
+  .minimal-menu-toggle[aria-expanded='true'] .minimal-menu-icon > span:first-child {
+    transform: translateY(.5px) rotate(45deg);
+  }
+
+  .minimal-menu-toggle[aria-expanded='true'] .minimal-menu-icon > span:last-child {
+    width: 100%;
+    transform: translateY(-.5px) rotate(-45deg);
+  }
+
+  .minimal-header[data-menu-open='true'] {
+    color: #191918;
+  }
+
+  .minimal-header[data-menu-open='true'] .minimal-header-bar {
+    background: #f4f0e8;
+    border-bottom-color: rgb(25 25 24 / 12%);
+  }
+
+  .minimal-header[data-menu-open='true'] .minimal-brand img {
+    filter: none;
+  }
+
+  .menu-overlay-open,
+  .menu-overlay-open body {
+    overflow: hidden;
+  }
+
+  .minimal-menu-panel {
+    position: fixed;
+    z-index: 4;
+    inset: 0;
+    display: block;
+    overflow: auto;
+    background: #f4f0e8;
+    color: #191918;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-1rem);
+    transition:
+      opacity 260ms ease,
+      transform 360ms cubic-bezier(.22, 1, .36, 1),
+      visibility 0s linear 360ms;
+  }
+
+  .minimal-menu-panel[data-open='true'] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition:
+      opacity 260ms ease,
+      transform 360ms cubic-bezier(.22, 1, .36, 1),
+      visibility 0s linear 0s;
+  }
+
+  .minimal-menu-panel-inner {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 6.35rem 1.25rem 1.5rem;
+  }
+
+  .minimal-menu-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: .85rem;
+    border-bottom: 1px solid rgb(25 25 24 / 13%);
+    color: #8a7968;
+    font-size: .6rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .minimal-menu-panel-head p {
+    margin: 0;
+  }
+
+  .minimal-menu-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .minimal-menu-list li {
+    border-bottom: 1px solid rgb(25 25 24 / 13%);
+    overflow: hidden;
+  }
+
+  .minimal-menu-list a {
+    display: grid;
+    grid-template-columns: 1.75rem minmax(0, 1fr);
+    align-items: center;
+    gap: .75rem;
+    min-height: 4.3rem;
+    color: inherit;
+    text-decoration: none;
+    opacity: 0;
+    transform: translateY(.65rem);
+    transition: opacity 300ms ease, transform 420ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .minimal-menu-panel[data-open='true'] .minimal-menu-list li:nth-child(1) a { transition-delay: 90ms; }
+  .minimal-menu-panel[data-open='true'] .minimal-menu-list li:nth-child(2) a { transition-delay: 120ms; }
+  .minimal-menu-panel[data-open='true'] .minimal-menu-list li:nth-child(3) a { transition-delay: 150ms; }
+  .minimal-menu-panel[data-open='true'] .minimal-menu-list li:nth-child(4) a { transition-delay: 180ms; }
+
+  .minimal-menu-panel[data-open='true'] .minimal-menu-list a {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .minimal-menu-index {
+    color: #8a7968;
+    font-size: .58rem;
+    letter-spacing: .11em;
+  }
+
+  .minimal-menu-link-label {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: -.025em;
+  }
+
+  .minimal-menu-footer {
+    margin-top: auto;
+    padding-top: 1.4rem;
+    border-top: 1px solid rgb(25 25 24 / 13%);
+  }
+
+  .minimal-menu-footer .eyebrow {
+    margin: 0 0 .55rem;
+    color: #8a7968;
+  }
+
+  .minimal-menu-phone {
+    display: inline-block;
+    color: inherit;
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 8vw, 2rem);
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .minimal-menu-footer > p:last-child {
+    margin: .7rem 0 0;
+    color: #746c63;
+    font-size: .68rem;
+    letter-spacing: .04em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desktop-navigation a::after,
+  .minimal-menu-icon > span,
+  .minimal-menu-panel,
+  .minimal-menu-list a {
+    transition: none !important;
+  }
+}

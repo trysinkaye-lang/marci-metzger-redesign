@@ -1,0 +1,395 @@
+/*
+ * Cinematic split-to-fullbleed hero
+ * ---------------------------------
+ * Inspired by 2026 editorial real-estate art direction and React Bits-style
+ * scroll expansion: a calm split composition becomes an immersive landscape
+ * as the user scrolls. Motion stays restrained and reversible.
+ */
+
+.hero-motion {
+  position: relative;
+  min-height: 172svh;
+  background: #171a17;
+  color: #f8f3eb;
+}
+
+.hero-motion::before,
+.hero-motion::after {
+  display: none !important;
+}
+
+.hero-motion-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: #171a17;
+}
+
+.hero-motion-intro {
+  position: absolute;
+  inset: 0 56% 0 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(7.25rem, 9vw, 9rem) clamp(2rem, 4.3vw, 5rem) clamp(2.25rem, 4vw, 3.75rem);
+  background: #171a17;
+  color: #f8f3eb;
+  will-change: transform, opacity;
+}
+
+.hero-motion-intro-main {
+  width: min(100%, 34rem);
+  margin-block: auto;
+  padding-block: clamp(2rem, 6vh, 4rem) clamp(1.5rem, 3vh, 2.75rem);
+}
+
+.hero-motion-intro-top {
+  display: grid;
+  gap: .35rem;
+  margin-bottom: clamp(1.25rem, 2.4vw, 1.9rem);
+}
+
+.hero-motion-brand,
+.hero-motion-location,
+.hero-motion-experience {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.hero-motion-location {
+  color: #dbcdbc;
+}
+
+.hero-motion-brand {
+  color: rgb(248 243 235 / 76%);
+}
+
+.hero-motion h1 {
+  width: auto;
+  max-width: 6.4ch;
+  margin: 0;
+  color: #fffaf2;
+  font-size: clamp(4.2rem, 6.35vw, 6.55rem);
+  font-weight: 500;
+  line-height: .88;
+  letter-spacing: -.032em;
+  text-rendering: optimizeLegibility;
+}
+
+.hero-motion h1 span {
+  display: block;
+  will-change: transform, opacity;
+}
+
+.hero-motion h1 span:last-child {
+  padding-left: .18em;
+  color: #eadfce;
+  font-size: .94em;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -.02em;
+}
+
+.hero-motion-experience {
+  max-width: 28rem;
+  margin-top: clamp(1.35rem, 2.2vw, 1.9rem);
+  color: rgb(248 243 235 / 84%);
+  line-height: 1.55;
+}
+
+.hero-motion-intro-actions,
+.hero-motion-reveal-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hero-motion-intro-actions {
+  flex: 0 0 auto;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgb(248 243 235 / 28%);
+}
+
+.hero-motion .button-light {
+  min-width: 9rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.hero-motion .text-link {
+  color: #fffaf2;
+  border-bottom-color: rgb(248 243 235 / 58%);
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+.hero-motion-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  clip-path: inset(0 0 0 44%);
+  will-change: clip-path;
+}
+
+.hero-motion-frame .hero-media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-motion-frame .hero-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  transform: scale(1.075);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.hero-motion-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgb(8 11 9 / 64%) 0%, rgb(8 11 9 / 22%) 43%, transparent 70%),
+    linear-gradient(180deg, rgb(8 10 9 / 8%) 0%, transparent 48%, rgb(8 10 9 / 54%) 100%);
+  will-change: opacity;
+}
+
+.hero-motion-reveal {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 5;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: clamp(2.25rem, 4vw, 3.5rem);
+  color: #fff;
+  pointer-events: none;
+}
+
+.hero-motion-reveal a {
+  pointer-events: auto;
+}
+
+.hero-motion-reveal-inner,
+.hero-motion-reveal-actions {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+}
+
+.hero-motion-reveal-inner .eyebrow {
+  margin-bottom: .85rem;
+  color: rgb(255 255 255 / 82%);
+  font-weight: 600;
+}
+
+.hero-motion-reveal-title {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.5vw, 4.8rem);
+  font-weight: 500;
+  line-height: .95;
+  letter-spacing: -.025em;
+}
+
+.hero-motion-scroll-cue {
+  position: absolute;
+  z-index: 6;
+  right: max(1.25rem, 2vw);
+  bottom: 2.4rem;
+  display: grid;
+  gap: .75rem;
+  justify-items: center;
+  color: rgb(255 255 255 / 84%);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-decoration: none;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.hero-motion-scroll-line {
+  display: block;
+  width: 1px;
+  height: 3.5rem;
+  background: linear-gradient(180deg, rgb(255 255 255 / 82%), rgb(255 255 255 / 10%));
+  transform-origin: top;
+  animation: hero-scroll-line 1.9s ease-in-out infinite;
+}
+
+@keyframes hero-scroll-line {
+  0%, 100% { transform: scaleY(.28); opacity: .46; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@media (max-width: 74rem) {
+  .hero-motion-intro {
+    inset-right: 53%;
+  }
+
+  .hero-motion-frame {
+    clip-path: inset(0 0 0 47%);
+  }
+
+  .hero-motion h1 {
+    font-size: clamp(3.85rem, 6.8vw, 5.7rem);
+  }
+}
+
+@media (max-width: 63.999rem) {
+  .hero-motion {
+    min-height: 155svh;
+  }
+
+  .hero-motion-intro {
+    inset-right: 50%;
+    padding-inline: max(var(--content-gutter), 2.25rem);
+  }
+
+  .hero-motion-intro-main {
+    width: min(100%, 28rem);
+  }
+
+  .hero-motion-frame {
+    clip-path: inset(0 0 0 50%);
+  }
+
+  .hero-motion h1 {
+    max-width: 6.2ch;
+    font-size: clamp(3.25rem, 7.1vw, 4.5rem);
+    line-height: .9;
+    letter-spacing: -.024em;
+  }
+
+  .hero-motion h1 span:last-child {
+    padding-left: .14em;
+  }
+
+  .hero-motion-brand,
+  .hero-motion-location,
+  .hero-motion-experience {
+    font-size: .72rem;
+  }
+
+  .hero-motion-reveal {
+    padding-inline: max(var(--content-gutter), 2.25rem);
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .hero-motion {
+    min-height: 100svh;
+  }
+
+  .hero-motion-stage {
+    position: relative;
+    height: 100svh;
+  }
+
+  .hero-motion-intro {
+    inset: 0;
+    z-index: 4;
+    padding: 6.5rem 1.35rem 1.6rem;
+    background: transparent;
+  }
+
+  .hero-motion-intro-main {
+    width: min(100%, 27rem);
+    margin-top: auto;
+    margin-bottom: 1.75rem;
+    padding-block: 0;
+  }
+
+  .hero-motion-frame {
+    clip-path: inset(0);
+  }
+
+  .hero-motion-frame .hero-image {
+    transform: scale(1.02);
+  }
+
+  .hero-motion-shade {
+    opacity: 1;
+    background:
+      linear-gradient(90deg, rgb(8 11 9 / 66%), rgb(8 11 9 / 24%) 72%),
+      linear-gradient(180deg, rgb(8 10 9 / 24%) 0%, transparent 38%, rgb(8 10 9 / 74%) 100%);
+  }
+
+  .hero-motion-intro-top {
+    gap: .3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-motion h1 {
+    max-width: 6.2ch;
+    font-size: clamp(3.35rem, 13.2vw, 4.45rem);
+    line-height: .92;
+    letter-spacing: -.018em;
+  }
+
+  .hero-motion h1 span:last-child {
+    padding-left: .1em;
+  }
+
+  .hero-motion-experience {
+    margin-top: 1.15rem;
+  }
+
+  .hero-motion-intro-actions {
+    flex-wrap: wrap;
+  }
+
+  .hero-motion-reveal,
+  .hero-motion-scroll-cue {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-motion {
+    min-height: 100svh;
+  }
+
+  .hero-motion-stage {
+    position: relative;
+  }
+
+  .hero-motion-intro {
+    background: rgb(23 26 23 / 78%);
+  }
+
+  .hero-motion-frame {
+    clip-path: inset(0);
+  }
+
+  .hero-motion-frame .hero-image {
+    transform: none;
+  }
+
+  .hero-motion-shade {
+    opacity: .78;
+  }
+
+  .hero-motion-reveal {
+    display: none;
+  }
+
+  .hero-motion-scroll-line {
+    animation: none;
+  }
+}
