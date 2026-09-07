@@ -1,127 +1,155 @@
-/* Marci profile — quiet split-panel treatment inspired by premium agent bios. */
+/*
+ * Marci profile — restrained 2026 editorial treatment.
+ * React Bits inspiration is limited to purposeful motion: masked image reveal,
+ * staggered heading entrance and a slow Logo Loop-style affiliations rail.
+ */
 
 .about-profile {
+  position: relative;
+  overflow: hidden;
   background: #f4f0e8;
 }
 
 .about-profile-shell {
   display: grid;
-  grid-template-columns: minmax(20rem, .9fr) minmax(0, 1.1fr);
-  min-height: clamp(38rem, 58vw, 47rem);
-  border: 1px solid rgb(39 36 31 / 10%);
-  background: #f8f5ee;
+  grid-template-columns: minmax(21rem, .92fr) minmax(0, 1.08fr);
+  gap: clamp(3.5rem, 7vw, 7.5rem);
+  align-items: center;
 }
 
 .about-profile-portrait {
-  position: relative;
+  width: min(100%, 34rem);
   margin: 0;
+}
+
+.about-profile-image-mask {
+  position: relative;
   overflow: hidden;
-  background: #1d201d;
+  background: #262724;
 }
 
-.about-profile-portrait img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-}
-
-.about-profile-portrait::after {
+.about-profile-image-mask::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 68%, rgb(15 16 14 / 38%) 100%);
+  border: 1px solid rgb(255 255 255 / 16%);
   pointer-events: none;
 }
 
+.about-profile-image-mask img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 18%;
+  transform-origin: center center;
+}
+
 .about-profile-portrait figcaption {
-  position: absolute;
-  z-index: 2;
-  right: 1.5rem;
-  bottom: 1.35rem;
-  left: 1.5rem;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  color: rgb(255 255 255 / 82%);
+  margin-top: .9rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--editorial-line);
+  color: #766e65;
   font-size: .62rem;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
 
 .about-profile-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(3rem, 6vw, 6.25rem);
+  max-width: 42rem;
 }
 
-.about-profile-content .eyebrow {
-  margin: 0 0 1rem;
+.about-profile-heading .eyebrow {
+  margin: 0 0 .95rem;
   color: #9a8068;
 }
 
 .about-profile-content h2 {
-  max-width: 8ch;
   margin: 0;
-  font-size: clamp(4.4rem, 7.2vw, 7.35rem);
-  line-height: .78;
+  font-size: clamp(4.25rem, 6.5vw, 6.8rem);
+  line-height: .8;
   letter-spacing: -.055em;
 }
 
+.about-profile-content h2 span {
+  display: block;
+}
+
+.about-profile-content h2 span:last-child {
+  margin-left: clamp(1.5rem, 4vw, 4rem);
+  color: #2f302d;
+}
+
 .about-profile-role {
-  max-width: 18ch;
-  margin: clamp(1.6rem, 2.5vw, 2.4rem) 0 0;
+  max-width: 19ch;
+  margin: clamp(1.8rem, 3vw, 2.7rem) 0 0;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.15vw, 2.1rem);
-  line-height: 1.12;
+  font-size: clamp(1.45rem, 2.05vw, 2rem);
+  line-height: 1.15;
 }
 
 .about-profile-rule {
   width: 100%;
   height: 1px;
-  margin-block: clamp(2rem, 3vw, 2.8rem);
+  margin-block: clamp(1.8rem, 3vw, 2.6rem);
   background: var(--editorial-line);
+  transform-origin: left center;
 }
 
 .about-profile-story {
-  max-width: 46ch;
+  max-width: 45ch;
   margin: 0;
   color: #6d655c;
-  font-size: 1rem;
+  font-size: .98rem;
   line-height: 1.75;
 }
 
+.about-profile-actions {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: clamp(1.9rem, 3vw, 2.75rem);
+}
+
 .about-profile-link {
-  align-self: flex-start;
-  margin-top: clamp(1.8rem, 2.8vw, 2.6rem);
-  gap: 1.2rem;
+  flex: 0 0 auto;
+  gap: 1.1rem;
   padding-bottom: .45rem;
+}
+
+.about-profile-location {
+  color: #8b8177;
+  font-size: .66rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .about-profile-detailbar {
   display: grid;
-  grid-template-columns: .85fr .9fr 1.25fr;
-  margin: clamp(2.5rem, 4vw, 3.75rem) 0 0;
+  grid-template-columns: .82fr 1.18fr;
+  margin: clamp(2rem, 3.5vw, 3rem) 0 0;
   border-top: 1px solid var(--editorial-line);
   border-bottom: 1px solid var(--editorial-line);
 }
 
 .about-profile-detailbar > div {
   min-width: 0;
-  padding: 1.1rem 1rem 1.15rem 0;
+  padding: 1.05rem 1rem 1.1rem 0;
 }
 
 .about-profile-detailbar > div + div {
-  padding-left: 1.2rem;
+  padding-left: 1.35rem;
   border-left: 1px solid var(--editorial-line);
 }
 
 .about-profile-detailbar dt {
-  margin-bottom: .42rem;
+  margin-bottom: .4rem;
   color: #9a8068;
-  font-size: .6rem;
+  font-size: .59rem;
   letter-spacing: .13em;
   text-transform: uppercase;
 }
@@ -129,92 +157,109 @@
 .about-profile-detailbar dd {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 1.45vw, 1.25rem);
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
   line-height: 1.2;
 }
 
+/* React Bits Logo Loop-inspired trust rail. */
 .about-affiliations {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  margin-top: clamp(2.5rem, 4vw, 4rem);
-  padding-block: 1.15rem;
+  margin-top: clamp(3.75rem, 6vw, 6rem);
+  padding-block: 1.2rem;
   border-top: 1px solid var(--editorial-line);
   border-bottom: 1px solid var(--editorial-line);
 }
 
 .about-affiliations .eyebrow {
   margin: 0;
+  white-space: nowrap;
 }
 
-.about-affiliations .affiliation-list {
-  justify-content: flex-end;
-  gap: clamp(1.25rem, 3vw, 2.75rem);
+.about-logo-loop {
+  min-width: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
-.about-affiliations .affiliation-list li {
+.about-logo-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: clamp(2.3rem, 5vw, 5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: about-logo-loop 28s linear infinite;
+  will-change: transform;
+}
+
+.about-logo-loop:hover .about-logo-track {
+  animation-play-state: paused;
+}
+
+.about-logo-track li {
   display: grid;
-  min-width: 4rem;
+  min-width: 5rem;
   place-items: center;
 }
 
-.about-affiliations .affiliation-list img {
-  max-width: 4.4rem;
-  max-height: 3.45rem;
+.about-logo-track img {
+  width: auto;
+  max-width: 5rem;
+  max-height: 3.6rem;
   object-fit: contain;
   filter: grayscale(1);
-  opacity: .66;
-  transition: opacity 180ms ease, filter 180ms ease, transform 180ms ease;
+  opacity: .62;
+  transition: opacity 180ms ease, filter 180ms ease;
 }
 
-.about-affiliations .affiliation-list img:hover {
+.about-logo-track img:hover {
   filter: grayscale(0);
   opacity: 1;
-  transform: translateY(-2px);
+}
+
+@keyframes about-logo-loop {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-50% - 2.5rem), 0, 0); }
 }
 
 @media (max-width: 63.999rem) {
   .about-profile-shell {
-    grid-template-columns: minmax(18rem, .85fr) minmax(0, 1.15fr);
-  }
-
-  .about-profile-content {
-    padding: clamp(2.5rem, 4vw, 4rem);
+    grid-template-columns: minmax(18rem, .88fr) minmax(0, 1.12fr);
+    gap: clamp(2.5rem, 5vw, 4rem);
   }
 
   .about-profile-content h2 {
-    font-size: clamp(3.8rem, 7.5vw, 5.6rem);
+    font-size: clamp(3.8rem, 7.5vw, 5.7rem);
   }
 
-  .about-profile-detailbar {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .about-profile-detailbar > div:nth-child(3) {
-    grid-column: 1 / -1;
-    padding-left: 0;
-    border-top: 1px solid var(--editorial-line);
-    border-left: 0;
+  .about-profile-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .9rem;
   }
 }
 
 @media (max-width: 47.999rem) {
   .about-profile-shell {
     grid-template-columns: 1fr;
-    min-height: 0;
+    gap: 2.75rem;
   }
 
   .about-profile-portrait {
-    aspect-ratio: 4 / 5;
-  }
-
-  .about-profile-content {
-    padding: 2.4rem 1.4rem 2.6rem;
+    width: 100%;
   }
 
   .about-profile-content h2 {
     font-size: clamp(3.6rem, 16vw, 5rem);
+  }
+
+  .about-profile-content h2 span:last-child {
+    margin-left: 1.25rem;
   }
 
   .about-profile-detailbar {
@@ -222,11 +267,8 @@
   }
 
   .about-profile-detailbar > div,
-  .about-profile-detailbar > div + div,
-  .about-profile-detailbar > div:nth-child(3) {
-    grid-column: auto;
+  .about-profile-detailbar > div + div {
     padding: .95rem 0;
-    border-top: 0;
     border-left: 0;
   }
 
@@ -239,14 +281,29 @@
     gap: 1rem;
   }
 
-  .about-affiliations .affiliation-list {
-    justify-content: flex-start;
-    flex-wrap: wrap;
+  .about-logo-loop {
+    margin-inline: calc(var(--content-gutter) * -1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-affiliations .affiliation-list img {
+  .about-logo-loop {
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .about-logo-track {
+    width: auto;
+    flex-wrap: wrap;
+    animation: none;
+  }
+
+  .about-logo-track li[aria-hidden='true'] {
+    display: none;
+  }
+
+  .about-logo-track img {
     transition: none;
   }
 }
