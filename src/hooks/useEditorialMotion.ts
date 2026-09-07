@@ -193,59 +193,88 @@ export function useEditorialMotion() {
           },
         )
 
-        const serviceCards = gsap.utils.toArray<HTMLElement>('.service-card')
+        const servicesStage = document.querySelector<HTMLElement>('.services-cinema-stage')
+        const servicesTrack = document.querySelector<HTMLElement>('.services-cinema-track')
+        const servicesProgress = document.querySelector<HTMLElement>('.services-cinema-progress-fill')
 
-        serviceCards.forEach((card, index) => {
-          const image = card.querySelector<HTMLElement>('.service-card-media img')
-          const body = card.querySelector<HTMLElement>('.service-card-body')
+        if (servicesStage && servicesTrack) {
+          gsap.set('.service-scene-2 .service-scene-copy, .service-scene-3 .service-scene-copy', {
+            opacity: 0.34,
+            x: 34,
+          })
 
-          if (image) {
-            gsap.fromTo(
-              image,
-              { scale: 1.06 },
+          const servicesTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: servicesStage,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: 0.8,
+              invalidateOnRefresh: true,
+            },
+          })
+
+          servicesTimeline
+            .to(
+              servicesTrack,
               {
-                scale: 1.015,
+                x: () => -(servicesTrack.scrollWidth - window.innerWidth),
                 ease: 'none',
-                scrollTrigger: {
-                  trigger: card,
-                  start: 'top bottom',
-                  end: 'bottom top',
-                  scrub: 1,
-                },
               },
+              0,
             )
-          }
-
-          if (body) {
-            gsap.from(body, {
-              opacity: 0,
-              y: 24,
-              duration: 0.75,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 72%',
-                toggleActions: 'play none none reverse',
+            .to(
+              servicesProgress,
+              {
+                scaleX: 1,
+                ease: 'none',
               },
-            })
-          }
-
-          const nextCard = serviceCards[index + 1]
-          if (nextCard) {
-            gsap.to(card, {
-              scale: 0.965,
-              opacity: 0.44,
-              y: -10,
-              ease: 'none',
-              scrollTrigger: {
-                trigger: nextCard,
-                start: 'top 88%',
-                end: 'top 20%',
-                scrub: 0.8,
+              0,
+            )
+            .to(
+              '.service-scene-media img',
+              {
+                scale: 1.012,
+                ease: 'none',
               },
-            })
-          }
-        })
+              0,
+            )
+            .to(
+              '.service-scene-1 .service-scene-copy',
+              {
+                opacity: 0.45,
+                x: -28,
+                ease: 'none',
+              },
+              0.18,
+            )
+            .to(
+              '.service-scene-2 .service-scene-copy',
+              {
+                opacity: 1,
+                x: 0,
+                ease: 'power2.out',
+              },
+              0.22,
+            )
+            .to(
+              '.service-scene-2 .service-scene-copy',
+              {
+                opacity: 0.45,
+                x: -28,
+                ease: 'none',
+              },
+              0.61,
+            )
+            .to(
+              '.service-scene-3 .service-scene-copy',
+              {
+                opacity: 1,
+                x: 0,
+                ease: 'power2.out',
+              },
+              0.64,
+            )
+        }
       })
 
       const stage = document.querySelector<HTMLElement>('.hero-motion-stage')
