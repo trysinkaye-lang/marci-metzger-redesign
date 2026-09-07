@@ -1,0 +1,331 @@
+/* Marci profile refinement — editorial, quiet and deliberately structured. */
+
+.about-profile {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #f4f0e8 0%, #f8f5ee 52%, #f4f0e8 100%);
+}
+
+.about-profile > .container {
+  position: relative;
+}
+
+.about-profile-layout {
+  display: grid;
+  grid-template-columns: minmax(22rem, .9fr) minmax(0, 1.1fr);
+  gap: clamp(4rem, 8vw, 8rem);
+  align-items: center;
+}
+
+.about-portrait-wrap {
+  position: relative;
+  width: min(100%, 35rem);
+}
+
+.about-profile .portrait-frame {
+  position: relative;
+  max-width: none;
+  margin: 0;
+}
+
+.about-profile .portrait-frame::before {
+  content: '';
+  position: absolute;
+  inset: -1rem 1rem 1rem -1rem;
+  z-index: 0;
+  border: 1px solid rgb(39 36 31 / 12%);
+  pointer-events: none;
+}
+
+.about-profile .portrait-frame img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.about-profile .portrait-frame figcaption {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--editorial-line);
+  color: #756d63;
+  font-size: .65rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.about-experience-badge {
+  position: absolute;
+  z-index: 4;
+  right: clamp(-1.5rem, -2vw, -.75rem);
+  bottom: clamp(3rem, 6vw, 5.5rem);
+  display: grid;
+  width: clamp(7.2rem, 9vw, 9rem);
+  min-height: clamp(8.6rem, 11vw, 10.75rem);
+  align-content: center;
+  justify-items: center;
+  padding: 1rem;
+  border: 1px solid rgb(255 255 255 / 22%);
+  background: #1d201d;
+  color: #f7f1e8;
+  text-align: center;
+  box-shadow: 0 18px 45px rgb(22 23 20 / 14%);
+}
+
+.about-experience-badge strong {
+  margin-block: .15rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5vw, 4.6rem);
+  font-weight: 400;
+  line-height: .8;
+}
+
+.about-experience-badge span {
+  font-size: .62rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.about-experience-kicker {
+  color: #cabca9;
+}
+
+.about-profile-copy {
+  display: block;
+  max-width: 43rem;
+}
+
+.about-profile-heading {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .85rem;
+}
+
+.about-profile-heading .eyebrow {
+  margin: 0;
+  color: #9a8068;
+}
+
+.about-profile-copy h2 {
+  max-width: 9ch;
+  margin: 0;
+  font-size: clamp(4.5rem, 7vw, 7.25rem);
+  line-height: .78;
+  letter-spacing: -.055em;
+}
+
+.about-profile-divider {
+  width: 100%;
+  height: 1px;
+  margin-block: clamp(2rem, 3vw, 3rem);
+  background: var(--editorial-line);
+}
+
+.about-profile-story {
+  display: grid;
+  grid-template-columns: minmax(12rem, .8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+.about-profile-story .lead {
+  max-width: 15ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.25vw, 2.15rem);
+  line-height: 1.1;
+}
+
+.about-profile-story > p:last-child {
+  max-width: 42ch;
+  margin: 0;
+  color: #6c645b;
+  font-size: .98rem;
+  line-height: 1.75;
+}
+
+.about-profile-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(2rem, 3.5vw, 3.25rem);
+  border-top: 1px solid var(--editorial-line);
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+.about-profile-meta > div {
+  display: grid;
+  gap: .45rem;
+  padding: 1.15rem 1.25rem 1.2rem 0;
+}
+
+.about-profile-meta > div + div {
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--editorial-line);
+}
+
+.about-profile-meta span {
+  color: #9a8068;
+  font-size: .62rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.about-profile-meta strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 400;
+}
+
+.about-profile-link {
+  display: inline-flex;
+  margin-top: clamp(2rem, 3vw, 2.75rem);
+  align-items: center;
+  gap: 1.25rem;
+  padding-bottom: .45rem;
+  border-bottom-width: 1px;
+}
+
+.about-affiliations {
+  display: grid;
+  grid-template-columns: minmax(12rem, .38fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  margin-top: clamp(4rem, 7vw, 7rem);
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--editorial-line);
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+.about-affiliations > div {
+  display: grid;
+  gap: .45rem;
+}
+
+.about-affiliations .eyebrow {
+  margin: 0;
+}
+
+.about-affiliations-note {
+  margin: 0;
+  color: #83786d;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.about-affiliations .affiliation-list {
+  justify-content: flex-end;
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.about-affiliations .affiliation-list li {
+  display: grid;
+  min-width: 4.6rem;
+  place-items: center;
+}
+
+.about-affiliations .affiliation-list img {
+  max-width: 4.5rem;
+  max-height: 3.6rem;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: .68;
+  transition: opacity 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+.about-affiliations .affiliation-list img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 63.999rem) {
+  .about-profile-layout {
+    grid-template-columns: minmax(18rem, .88fr) minmax(0, 1.12fr);
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .about-profile-copy h2 {
+    font-size: clamp(3.9rem, 7.8vw, 5.6rem);
+  }
+
+  .about-profile-story {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  .about-profile-story .lead {
+    max-width: 18ch;
+  }
+
+  .about-experience-badge {
+    right: -.75rem;
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .about-profile-layout {
+    grid-template-columns: 1fr;
+    gap: 3.25rem;
+  }
+
+  .about-portrait-wrap {
+    width: calc(100% - 1rem);
+  }
+
+  .about-profile .portrait-frame::before {
+    inset: -.6rem .6rem .6rem -.6rem;
+  }
+
+  .about-experience-badge {
+    right: -1rem;
+    bottom: 3.5rem;
+    width: 6.8rem;
+    min-height: 8rem;
+  }
+
+  .about-profile-copy {
+    max-width: none;
+  }
+
+  .about-profile-copy h2 {
+    font-size: clamp(3.7rem, 17vw, 5.25rem);
+  }
+
+  .about-profile-divider {
+    margin-block: 1.75rem;
+  }
+
+  .about-profile-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .about-profile-meta > div + div {
+    padding-left: 0;
+    border-top: 1px solid var(--editorial-line);
+    border-left: 0;
+  }
+
+  .about-affiliations {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-affiliations .affiliation-list {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-affiliations .affiliation-list img {
+    transition: none;
+  }
+}
