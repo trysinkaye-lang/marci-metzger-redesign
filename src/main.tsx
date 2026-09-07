@@ -7,6 +7,7 @@ import './styles/2026-editorial-v2.css'
 import './styles/minimal-header.css'
 import './styles/2026-editorial-v3.css'
 import './styles/2026-cleanup.css'
+import './styles/about-profile.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
