@@ -193,6 +193,88 @@ export function useEditorialMotion() {
           },
         )
 
+        const buyerTrigger = {
+          trigger: '.buyer-story',
+          start: 'top 74%',
+          toggleActions: 'play none none reverse',
+        }
+
+        gsap.from('.buyer-story-heading', {
+          opacity: 0,
+          y: 30,
+          duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: buyerTrigger,
+        })
+
+        gsap.from('.buyer-story-copy', {
+          opacity: 0,
+          y: 24,
+          duration: 0.8,
+          delay: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: buyerTrigger,
+        })
+
+        gsap.fromTo(
+          '.buyer-story-primary-mask',
+          { clipPath: 'inset(0 11% 0 0)' },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.buyer-story-gallery',
+              start: 'top 86%',
+              end: 'top 36%',
+              scrub: 0.9,
+            },
+          },
+        )
+
+        gsap.from('.buyer-story-detail-mask', {
+          opacity: 0,
+          y: 64,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.buyer-story-gallery',
+            start: 'top 72%',
+            toggleActions: 'play none none reverse',
+          },
+        })
+
+        gsap.fromTo(
+          '.buyer-story-primary-mask img',
+          { scale: 1.055, yPercent: 1.5 },
+          {
+            scale: 1.01,
+            yPercent: -1.5,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.buyer-story-gallery',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          },
+        )
+
+        gsap.fromTo(
+          '.buyer-story-detail-mask img',
+          { scale: 1.06, yPercent: -1 },
+          {
+            scale: 1.015,
+            yPercent: 2,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: '.buyer-story-gallery',
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1,
+            },
+          },
+        )
+
         const servicesStage = document.querySelector<HTMLElement>('.services-cinema-stage')
         const servicesTrack = document.querySelector<HTMLElement>('.services-cinema-track')
         const servicesProgress = document.querySelector<HTMLElement>('.services-cinema-progress-fill')
