@@ -57,6 +57,31 @@ jobs:
             Object.entries(report.categories).map(([key, value]) => [key, Math.round(value.score * 100)])
           );
           console.log('LIGHTHOUSE_SCORES=' + JSON.stringify(scores));
+
+          const metricIds = [
+            'first-contentful-paint',
+            'largest-contentful-paint',
+            'speed-index',
+            'total-blocking-time',
+            'cumulative-layout-shift',
+          ];
+          const metrics = Object.fromEntries(
+            metricIds.map((id) => [id, report.audits[id]?.displayValue ?? 'n/a'])
+          );
+          console.log('LIGHTHOUSE_METRICS=' + JSON.stringify(metrics));
+
+          const opportunities = Object.values(report.audits)
+            .filter((audit) => audit.details?.type === 'opportunity' && Number(audit.details?.overallSavingsMs || 0) > 0)
+            .sort((a, b) => Number(b.details.overallSavingsMs || 0) - Number(a.details.overallSavingsMs || 0))
+            .slice(0, 8)
+            .map((audit) => ({
+              id: audit.id,
+              title: audit.title,
+              savingsMs: Math.round(Number(audit.details.overallSavingsMs || 0)),
+              displayValue: audit.displayValue ?? '',
+            }));
+          console.log('LIGHTHOUSE_OPPORTUNITIES=' + JSON.stringify(opportunities));
+
           const thresholds = { accessibility: 90, 'best-practices': 90, seo: 90, performance: 70 };
           const failures = Object.entries(thresholds)
             .filter(([key, min]) => scores[key] < min)
