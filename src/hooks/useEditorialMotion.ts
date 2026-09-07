@@ -41,6 +41,53 @@ export function useEditorialMotion() {
           },
         )
 
+        const aboutTrigger = {
+          trigger: '.about-profile',
+          start: 'top 72%',
+          toggleActions: 'play none none reverse',
+        }
+
+        gsap.from('.about-profile-image-mask', {
+          clipPath: 'inset(0 0 16% 0)',
+          opacity: 0.7,
+          y: 28,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: aboutTrigger,
+        })
+
+        gsap.from('.about-profile-image-mask img', {
+          scale: 1.055,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: aboutTrigger,
+        })
+
+        gsap.from('.about-profile-heading h2 span', {
+          opacity: 0,
+          y: 34,
+          duration: 0.8,
+          stagger: 0.09,
+          ease: 'power3.out',
+          scrollTrigger: aboutTrigger,
+        })
+
+        gsap.from('.about-profile-role, .about-profile-story, .about-profile-actions, .about-profile-detailbar', {
+          opacity: 0,
+          y: 18,
+          duration: 0.7,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: aboutTrigger,
+        })
+
+        gsap.from('.about-profile-rule', {
+          scaleX: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: aboutTrigger,
+        })
+
         gsap.fromTo(
           '.search-story > img',
           { scale: 1, yPercent: 1 },
