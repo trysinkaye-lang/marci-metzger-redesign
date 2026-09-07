@@ -43,7 +43,9 @@ export function PropertySearch() {
 
           <div className="search-footer">
             <p id="search-status" className="section-note">{content.unavailable}</p>
-            <a className="button" href={content.sourceHref}>{content.subtitle}<span aria-hidden="true">↗</span><span className="visually-hidden"> on the original website</span></a>
+            <a className="button" href={content.sourceHref} target="_blank" rel="noreferrer">
+              {content.action}<span aria-hidden="true">↗</span><span className="visually-hidden"> on the original website</span>
+            </a>
           </div>
         </div>
       </Container>
