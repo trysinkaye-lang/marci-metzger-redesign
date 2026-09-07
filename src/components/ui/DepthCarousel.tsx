@@ -74,73 +74,74 @@ export function DepthCarousel({ items }: DepthCarouselProps) {
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
       >
-        <div className="depth-carousel-rail" aria-live="off">
-          {items.map((item, index) => {
-            const offset = relativeIndex(index, activeIndex, items.length)
-            const distance = Math.abs(offset)
-            const visible = distance <= 2
-            const x = offset === 0 ? 0 : Math.sign(offset) * (distance === 1 ? 48 : 76)
-            const z = distance === 0 ? 0 : distance === 1 ? -130 : -240
-            const rotation = offset === 0 ? 0 : -Math.sign(offset) * (distance === 1 ? 10 : 14)
-            const scale = distance === 0 ? 1 : distance === 1 ? 0.86 : 0.72
-            const opacity = distance === 0 ? 1 : distance === 1 ? 0.58 : 0.2
+        <div className="depth-carousel-stage">
+          <button
+            type="button"
+            className="depth-carousel-side-arrow depth-carousel-side-arrow-previous"
+            onPointerDown={(event) => event.stopPropagation()}
+            onPointerUp={(event) => event.stopPropagation()}
+            onClick={(event) => {
+              event.stopPropagation()
+              goPrevious()
+            }}
+            aria-label="Previous image"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
 
-            return (
-              <button
-                key={item.id}
-                className="depth-carousel-card"
-                type="button"
-                aria-label={`Show ${item.title}`}
-                aria-hidden={!visible}
-                tabIndex={offset === 0 ? 0 : -1}
-                onClick={() => goTo(index)}
-                style={{
-                  transform: `translate3d(calc(-50% + ${x}%), -50%, ${z}px) rotateY(${rotation}deg) scale(${scale})`,
-                  opacity: visible ? opacity : 0,
-                  zIndex: 10 - distance,
-                  pointerEvents: visible ? 'auto' : 'none',
-                }}
-              >
-                <img
-                  src={item.src}
-                  alt={offset === 0 ? item.alt : ''}
-                  width={item.width}
-                  height={item.height}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                />
-              </button>
-            )
-          })}
+          <div className="depth-carousel-rail" aria-live="off">
+            {items.map((item, index) => {
+              const offset = relativeIndex(index, activeIndex, items.length)
+              const distance = Math.abs(offset)
+              const visible = distance <= 2
+              const x = offset === 0 ? 0 : Math.sign(offset) * (distance === 1 ? 48 : 76)
+              const z = distance === 0 ? 0 : distance === 1 ? -130 : -240
+              const rotation = offset === 0 ? 0 : -Math.sign(offset) * (distance === 1 ? 10 : 14)
+              const scale = distance === 0 ? 1 : distance === 1 ? 0.86 : 0.72
+              const opacity = distance === 0 ? 1 : distance === 1 ? 0.58 : 0.2
 
-          <div className="depth-carousel-overlay-controls" aria-label="Gallery controls">
-            <button
-              type="button"
-              className="depth-carousel-arrow depth-carousel-arrow-previous"
-              onPointerDown={(event) => event.stopPropagation()}
-              onPointerUp={(event) => event.stopPropagation()}
-              onClick={(event) => {
-                event.stopPropagation()
-                goPrevious()
-              }}
-              aria-label="Previous image"
-            >
-              <span aria-hidden="true">←</span>
-            </button>
-            <button
-              type="button"
-              className="depth-carousel-arrow depth-carousel-arrow-next"
-              onPointerDown={(event) => event.stopPropagation()}
-              onPointerUp={(event) => event.stopPropagation()}
-              onClick={(event) => {
-                event.stopPropagation()
-                goNext()
-              }}
-              aria-label="Next image"
-            >
-              <span aria-hidden="true">→</span>
-            </button>
+              return (
+                <button
+                  key={item.id}
+                  className="depth-carousel-card"
+                  type="button"
+                  aria-label={`Show ${item.title}`}
+                  aria-hidden={!visible}
+                  tabIndex={offset === 0 ? 0 : -1}
+                  onClick={() => goTo(index)}
+                  style={{
+                    transform: `translate3d(calc(-50% + ${x}%), -50%, ${z}px) rotateY(${rotation}deg) scale(${scale})`,
+                    opacity: visible ? opacity : 0,
+                    zIndex: 10 - distance,
+                    pointerEvents: visible ? 'auto' : 'none',
+                  }}
+                >
+                  <img
+                    src={item.src}
+                    alt={offset === 0 ? item.alt : ''}
+                    width={item.width}
+                    height={item.height}
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    decoding="async"
+                  />
+                </button>
+              )
+            })}
           </div>
+
+          <button
+            type="button"
+            className="depth-carousel-side-arrow depth-carousel-side-arrow-next"
+            onPointerDown={(event) => event.stopPropagation()}
+            onPointerUp={(event) => event.stopPropagation()}
+            onClick={(event) => {
+              event.stopPropagation()
+              goNext()
+            }}
+            aria-label="Next image"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
       </div>
 
