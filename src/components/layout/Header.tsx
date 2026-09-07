@@ -29,6 +29,8 @@ export function Header() {
     }
   }, [menuOpen])
 
+  const closeMenu = () => setMenuOpen(false)
+
   return (
     <header className="site-header minimal-header" data-menu-open={menuOpen}>
       <Container className="minimal-header-bar">
@@ -56,51 +58,65 @@ export function Header() {
         </button>
       </Container>
 
-      <div
+      <button
+        className="minimal-menu-backdrop"
+        type="button"
+        aria-label="Close menu"
+        aria-hidden={!menuOpen}
+        tabIndex={menuOpen ? 0 : -1}
+        onClick={closeMenu}
+      />
+
+      <aside
         id="minimal-site-menu"
         className="minimal-menu-panel"
         data-open={menuOpen}
         aria-hidden={!menuOpen}
       >
-        <div className="minimal-menu-wipe" aria-hidden="true" />
-
-        <Container className="minimal-menu-inner">
-          <div className="minimal-menu-primary">
-            <p className="minimal-menu-kicker">Navigate</p>
-            <nav aria-label="Main navigation">
-              <ul className="minimal-menu-list">
-                {compactNavigation.map((link, index) => (
-                  <li key={link.href}>
-                    <a href={link.href} tabIndex={menuOpen ? 0 : -1} onClick={() => setMenuOpen(false)}>
-                      <span className="minimal-menu-index" aria-hidden="true">0{index + 1}</span>
-                      <span className="minimal-menu-link-label">{link.label}</span>
-                      <span className="minimal-menu-link-arrow" aria-hidden="true">↗</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+        <div className="minimal-menu-panel-inner">
+          <div className="minimal-menu-panel-head">
+            <p className="minimal-menu-kicker">Explore Pahrump</p>
+            <span className="minimal-menu-panel-count" aria-hidden="true">01—04</span>
           </div>
 
-          <aside className="minimal-menu-aside" aria-label="Marci Metzger contact">
-            <figure className="minimal-menu-image" aria-hidden="true">
-              <img src="/images/hero.jpg" alt="" width="1600" height="1067" />
-              <figcaption>
-                <span>Pahrump, Nevada</span>
-                <span>The Ridge Realty Group</span>
-              </figcaption>
-            </figure>
+          <nav aria-label="Main navigation" className="minimal-menu-nav">
+            <ul className="minimal-menu-list">
+              {compactNavigation.map((link, index) => (
+                <li key={link.href}>
+                  <a href={link.href} tabIndex={menuOpen ? 0 : -1} onClick={closeMenu}>
+                    <span className="minimal-menu-index" aria-hidden="true">0{index + 1}</span>
+                    <span className="minimal-menu-link-label" data-label={link.label}>
+                      <span>{link.label}</span>
+                    </span>
+                    <span className="minimal-menu-link-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-            <div className="minimal-menu-contact">
+          <figure className="minimal-menu-strip" aria-hidden="true">
+            <img src="/images/hero.jpg" alt="" width="1600" height="1067" />
+            <figcaption>
+              <span>Pahrump, Nevada</span>
+              <span>The Ridge Realty Group</span>
+            </figcaption>
+          </figure>
+
+          <div className="minimal-menu-footer">
+            <div>
               <p className="eyebrow">Speak with Marci</p>
               <a className="minimal-menu-phone" href={siteContent.contact.phoneHref} tabIndex={menuOpen ? 0 : -1}>
                 {siteContent.contact.phone}
               </a>
-              <p>Realtor for nearly 3 decades</p>
             </div>
-          </aside>
-        </Container>
-      </div>
+            <div className="minimal-menu-footer-meta" aria-hidden="true">
+              <span>Nearly 3 decades</span>
+              <span>Pahrump Realtor</span>
+            </div>
+          </div>
+        </div>
+      </aside>
     </header>
   )
 }
