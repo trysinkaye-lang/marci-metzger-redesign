@@ -81,8 +81,8 @@
   grid-template-columns: auto minmax(5rem, 12rem) auto;
   gap: .85rem;
   align-items: center;
-  color: rgb(245 240 232 / 64%);
-  font-size: .58rem;
+  color: rgb(245 240 232 / 76%);
+  font-size: .6rem;
   letter-spacing: .14em;
 }
 
@@ -90,14 +90,14 @@
   position: relative;
   height: 1px;
   overflow: hidden;
-  background: rgb(255 255 255 / 18%);
+  background: rgb(255 255 255 / 24%);
 }
 
 .services-cinema-progress-fill {
   position: absolute;
   inset: 0;
   display: block;
-  background: #e7d6c3;
+  background: #f0dfcc;
   transform: scaleX(0);
   transform-origin: left center;
   will-change: transform;
@@ -117,7 +117,7 @@
   height: 100svh;
   grid-template-columns: minmax(0, 1.45fr) minmax(26rem, .72fr);
   background: #eee8de;
-  color: #1c1c19;
+  color: #181816;
 }
 
 .service-scene:nth-child(even) {
@@ -164,12 +164,13 @@
   min-width: 0;
   grid-template-rows: auto 1fr auto;
   padding: clamp(4.7rem, 7vw, 7rem) clamp(2.25rem, 4.4vw, 4.8rem) clamp(2.2rem, 3vw, 3rem);
-  border-left: 1px solid rgb(27 27 25 / 10%);
-  background: #f3eee5;
+  border-left: 1px solid rgb(27 27 25 / 13%);
+  background: #f7f2e9;
+  opacity: 1 !important;
 }
 
 .service-scene:nth-child(even) .service-scene-copy {
-  border-right: 1px solid rgb(27 27 25 / 10%);
+  border-right: 1px solid rgb(27 27 25 / 13%);
   border-left: 0;
 }
 
@@ -178,15 +179,16 @@
   display: flex;
   justify-content: space-between;
   gap: 1.25rem;
-  color: #8c7865;
-  font-size: .59rem;
+  color: #6f6052;
+  font-size: .62rem;
+  font-weight: 600;
   letter-spacing: .13em;
   text-transform: uppercase;
 }
 
 .service-scene-meta {
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgb(27 27 25 / 12%);
+  border-bottom: 1px solid rgb(27 27 25 / 16%);
 }
 
 .service-scene-body {
@@ -196,12 +198,14 @@
 
 .service-scene-body .eyebrow {
   margin: 0 0 1rem;
-  color: #9d826a;
+  color: #806852;
+  font-weight: 600;
 }
 
 .service-scene-body h3 {
   max-width: 8ch;
   margin: 0;
+  color: #1d1c19;
   font-family: var(--font-display);
   font-size: clamp(3.6rem, 5.6vw, 6.2rem);
   font-weight: 400;
@@ -212,16 +216,16 @@
 .service-scene-body > p:last-child {
   max-width: 42ch;
   margin: clamp(1.6rem, 2.7vw, 2.7rem) 0 0;
-  color: #655d54;
-  font-size: clamp(.97rem, 1.05vw, 1.08rem);
-  line-height: 1.75;
+  color: #514a43;
+  font-size: clamp(1rem, 1.06vw, 1.1rem);
+  line-height: 1.72;
 }
 
 .service-scene-footer {
   align-self: end;
   padding-top: 1rem;
-  border-top: 1px solid rgb(27 27 25 / 12%);
-  color: #776d62;
+  border-top: 1px solid rgb(27 27 25 / 16%);
+  color: #62584f;
 }
 
 @media (max-width: 63.999rem) {
