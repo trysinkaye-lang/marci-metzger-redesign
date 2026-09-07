@@ -10,6 +10,7 @@ import './styles/2026-cleanup.css'
 import './styles/about-profile.css'
 import './styles/property-search.css'
 import './styles/hero-motion.css'
+import './styles/services-motion.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
