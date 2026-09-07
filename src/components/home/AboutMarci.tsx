@@ -7,7 +7,9 @@ export function AboutMarci() {
       <Container>
         <div className="about-profile-shell">
           <figure className="about-profile-portrait">
-            <img src="/images/marci-portrait.jpg" alt="Marci Metzger" width="1632" height="2449" loading="lazy" />
+            <div className="about-profile-image-mask">
+              <img src="/images/marci-portrait.jpg" alt="Marci Metzger" width="1632" height="2449" loading="lazy" />
+            </div>
             <figcaption>
               <span>Marci Metzger</span>
               <span>The Ridge Realty Group</span>
@@ -15,21 +17,26 @@ export function AboutMarci() {
           </figure>
 
           <div className="about-profile-content">
-            <p className="eyebrow">Meet Marci</p>
-            <h2 id="about-heading">{siteContent.about.title}</h2>
+            <div className="about-profile-heading">
+              <p className="eyebrow">Meet Marci</p>
+              <h2 id="about-heading">
+                <span>Marci</span>
+                <span>Metzger</span>
+              </h2>
+            </div>
+
             <p className="about-profile-role">{siteContent.about.subtitle}</p>
             <div className="about-profile-rule" aria-hidden="true" />
             <p className="about-profile-story">{siteContent.performance.description}</p>
 
-            <a className="text-link about-profile-link" href="#contact">
-              Let&apos;s Move<span aria-hidden="true">↗</span>
-            </a>
+            <div className="about-profile-actions">
+              <a className="text-link about-profile-link" href="#contact">
+                Let&apos;s Move<span aria-hidden="true">↗</span>
+              </a>
+              <span className="about-profile-location">Pahrump, Nevada</span>
+            </div>
 
             <dl className="about-profile-detailbar" aria-label="Marci Metzger profile details">
-              <div>
-                <dt>Market</dt>
-                <dd>Pahrump, Nevada</dd>
-              </div>
               <div>
                 <dt>Experience</dt>
                 <dd>Nearly 3 decades</dd>
@@ -44,13 +51,20 @@ export function AboutMarci() {
 
         <div className="about-affiliations">
           <p className="eyebrow">Professional affiliations</p>
-          <ul className="affiliation-list" aria-label="Professional affiliations">
-            {siteContent.affiliations.map((item) => (
-              <li key={item.image}>
-                <img src={item.image} alt={item.label} loading="lazy" width="100" height="100" />
-              </li>
-            ))}
-          </ul>
+          <div className="about-logo-loop" aria-label="Professional affiliations">
+            <ul className="affiliation-list about-logo-track">
+              {siteContent.affiliations.map((item) => (
+                <li key={`primary-${item.image}`}>
+                  <img src={item.image} alt={item.label} loading="lazy" width="100" height="100" />
+                </li>
+              ))}
+              {siteContent.affiliations.map((item) => (
+                <li key={`duplicate-${item.image}`} aria-hidden="true">
+                  <img src={item.image} alt="" loading="lazy" width="100" height="100" />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </section>
