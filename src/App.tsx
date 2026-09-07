@@ -2,7 +2,6 @@ import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
 import { Hero } from './components/home/Hero'
 import { PerformanceStats } from './components/home/PerformanceStats'
-import { EditorialInterlude } from './components/home/EditorialInterlude'
 import { AboutMarci } from './components/home/AboutMarci'
 import { PropertySearch } from './components/home/PropertySearch'
 import { SellerExperience } from './components/home/SellerExperience'
@@ -22,7 +21,6 @@ export default function App() {
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <PerformanceStats />
-        <EditorialInterlude />
         <AboutMarci />
         <PropertySearch />
         <SellerExperience />
