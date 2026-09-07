@@ -55,7 +55,7 @@ export function AboutMarci() {
         <div className="affiliation-strip about-affiliations">
           <div>
             <p className="eyebrow">Professional affiliations</p>
-            <p className="about-affiliations-note">Local service backed by established real-estate organizations.</p>
+            <p className="about-affiliations-note">Pahrump, Nevada</p>
           </div>
           <ul className="affiliation-list" aria-label="Professional affiliations">
             {siteContent.affiliations.map((item) => (
