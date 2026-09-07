@@ -1,0 +1,68 @@
+name: Final QA
+
+on:
+  push:
+    branches:
+      - feature/2026-elegant-redesign
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Start local preview
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/marci-vite.log 2>&1 &
+          echo $! > /tmp/marci-vite.pid
+          for i in {1..30}; do
+            if curl -fsS http://127.0.0.1:4173/ > /dev/null; then
+              echo "Preview server is ready"
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/marci-vite.log
+          exit 1
+
+      - name: Lighthouse audit
+        run: |
+          npx --yes lighthouse@12.8.2 http://127.0.0.1:4173/ \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-gpu" \
+            --output=json \
+            --output-path=/tmp/lighthouse.json \
+            --quiet
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('/tmp/lighthouse.json', 'utf8'));
+          const scores = Object.fromEntries(
+            Object.entries(report.categories).map(([key, value]) => [key, Math.round(value.score * 100)])
+          );
+          console.log('LIGHTHOUSE_SCORES=' + JSON.stringify(scores));
+          const thresholds = { accessibility: 90, 'best-practices': 90, seo: 90, performance: 70 };
+          const failures = Object.entries(thresholds)
+            .filter(([key, min]) => scores[key] < min)
+            .map(([key, min]) => `${key}: ${scores[key]} < ${min}`);
+          if (failures.length) {
+            console.error('QA threshold failures: ' + failures.join(', '));
+            process.exit(1);
+          }
+          NODE
