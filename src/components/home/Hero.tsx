@@ -6,16 +6,17 @@ export function Hero() {
     <section id="home" className="hero hero-motion" aria-labelledby="hero-heading" tabIndex={-1}>
       <div className="hero-motion-stage">
         <div className="hero-motion-intro">
-          <div className="hero-motion-intro-top">
-            <p className="hero-motion-brand">Marci Metzger · The Ridge Realty Group</p>
-            <p className="hero-motion-location">{siteContent.hero.eyebrow}</p>
-          </div>
-
           <div className="hero-motion-intro-main">
+            <div className="hero-motion-intro-top">
+              <p className="hero-motion-location">{siteContent.hero.eyebrow}</p>
+              <p className="hero-motion-brand">Marci Metzger · The Ridge Realty Group</p>
+            </div>
+
             <h1 id="hero-heading">
               <span>Pahrump</span>
               <span>Realtor</span>
             </h1>
+
             <p className="hero-motion-experience">{siteContent.about.subtitle}</p>
           </div>
 
