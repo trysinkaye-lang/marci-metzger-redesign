@@ -1,51 +1,51 @@
 /*
- * Buyer editorial story
- * ----------------------
- * A quieter cinematic spread: oversized type, two independent image planes,
- * and restrained scroll motion. No cards, badges, blur, or decorative 3D.
+ * Buyer journey — scroll-expand editorial treatment
+ * --------------------------------------------------
+ * Inspired by current premium property/editorial sites and React Bits-style
+ * scroll expansion: one strong image grows with the page, while the secondary
+ * source image is shown at its natural landscape ratio instead of being cropped.
  */
 
-.buyer-story {
+.buyer-journey {
   position: relative;
   overflow: hidden;
+  padding-block: clamp(5.5rem, 8vw, 8.5rem) 0;
   background: #f4f0e8;
   color: #1a1a18;
 }
 
-.buyer-story > .container {
-  position: relative;
-}
-
-.buyer-story-intro {
+.buyer-journey-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(20rem, .72fr);
+  grid-template-columns: minmax(0, 1.05fr) minmax(20rem, .72fr);
   gap: clamp(3rem, 8vw, 8rem);
   align-items: end;
-  padding-top: clamp(1.4rem, 2vw, 2rem);
+  padding-top: clamp(1.2rem, 2vw, 1.8rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
   border-top: 1px solid rgb(28 27 24 / 14%);
 }
 
-.buyer-story-heading .eyebrow {
+.buyer-journey-heading .eyebrow {
   margin: 0 0 1rem;
   color: #9b8069;
 }
 
-.buyer-story-heading h2 {
+.buyer-journey-heading h2 {
   max-width: 7ch;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(4.4rem, 7.4vw, 7.4rem);
+  font-size: clamp(4.6rem, 7.6vw, 7.7rem);
   font-weight: 400;
   line-height: .8;
   letter-spacing: -.055em;
 }
 
-.buyer-story-copy {
+.buyer-journey-intro-copy {
   align-self: end;
-  padding-bottom: .45rem;
+  padding-bottom: .35rem;
 }
 
-.buyer-story-copy > p {
+.buyer-journey-intro-copy > p,
+.buyer-handoff-copy > p:not(.eyebrow) {
   max-width: 40ch;
   margin: 0;
   color: #70685f;
@@ -53,141 +53,166 @@
   line-height: 1.75;
 }
 
-.buyer-story-copy .text-link {
+.buyer-journey-intro-copy .text-link,
+.buyer-handoff-copy .text-link {
   display: inline-flex;
-  margin-top: clamp(1.7rem, 3vw, 2.6rem);
+  margin-top: clamp(1.6rem, 2.6vw, 2.4rem);
 }
 
-.buyer-story-gallery {
+.buyer-expand-stage {
   position: relative;
+  height: 145svh;
+  margin-top: clamp(.5rem, 1vw, 1rem);
+}
+
+.buyer-expand-sticky {
+  position: sticky;
+  top: 0;
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  column-gap: clamp(.9rem, 1.6vw, 1.5rem);
-  align-items: end;
-  margin-top: clamp(3.5rem, 6vw, 6rem);
-  padding-bottom: clamp(1rem, 2vw, 2rem);
-}
-
-.buyer-story-primary,
-.buyer-story-detail {
-  margin: 0;
-}
-
-.buyer-story-primary {
-  grid-column: 1 / 9;
-}
-
-.buyer-story-detail {
-  grid-column: 9 / 13;
-  padding-bottom: clamp(1.5rem, 4vw, 4.2rem);
-}
-
-.buyer-story-image-mask {
-  position: relative;
+  min-height: 100svh;
+  place-items: center;
   overflow: hidden;
-  background: #ddd6ca;
-  will-change: clip-path, transform, opacity;
 }
 
-.buyer-story-primary-mask {
-  aspect-ratio: 16 / 10;
+.buyer-expand-frame {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  clip-path: inset(8% 11% 8% 11%);
+  background: #d8d1c5;
+  will-change: clip-path;
 }
 
-.buyer-story-detail-mask {
-  aspect-ratio: 4 / 5;
-}
-
-.buyer-story-image-mask::after {
+.buyer-expand-frame::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgb(30 29 27 / 7%);
+  background: linear-gradient(180deg, transparent 68%, rgb(18 17 15 / 12%) 100%);
 }
 
-.buyer-story-image-mask img {
+.buyer-expand-image {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.035);
+  object-position: center center;
+  transform: scale(1.08);
   will-change: transform;
 }
 
-.buyer-story-primary-mask img {
-  object-position: center center;
+.buyer-handoff {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(20rem, .72fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: center;
+  padding-top: clamp(4rem, 7vw, 7rem);
+  padding-bottom: clamp(5.5rem, 9vw, 9rem);
 }
 
-.buyer-story-detail-mask img {
-  object-position: center center;
+.buyer-handoff-image {
+  margin: 0;
+  overflow: hidden;
+  background: #ddd6ca;
+}
+
+.buyer-handoff-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2560 / 1383;
+  object-fit: cover;
+}
+
+.buyer-handoff-copy {
+  max-width: 31rem;
+}
+
+.buyer-handoff-copy .eyebrow {
+  margin: 0 0 1rem;
+  color: #9b8069;
 }
 
 @media (max-width: 63.999rem) {
-  .buyer-story-intro {
+  .buyer-journey-intro,
+  .buyer-handoff {
     grid-template-columns: minmax(0, 1fr) minmax(17rem, .8fr);
     gap: clamp(2rem, 5vw, 4rem);
   }
 
-  .buyer-story-heading h2 {
-    font-size: clamp(4rem, 9vw, 6.4rem);
+  .buyer-journey-heading h2 {
+    font-size: clamp(4rem, 9vw, 6.5rem);
   }
 
-  .buyer-story-primary {
-    grid-column: 1 / 9;
-  }
-
-  .buyer-story-detail {
-    grid-column: 9 / 13;
+  .buyer-expand-frame {
+    clip-path: inset(7% 7% 7% 7%);
   }
 }
 
 @media (max-width: 47.999rem) {
-  .buyer-story-intro {
+  .buyer-journey {
+    padding-top: 4.5rem;
+  }
+
+  .buyer-journey-intro,
+  .buyer-handoff {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .buyer-story-heading h2 {
+  .buyer-journey-intro {
+    padding-bottom: 2.5rem;
+  }
+
+  .buyer-journey-heading h2 {
     max-width: 8ch;
     font-size: clamp(3.8rem, 17vw, 5.4rem);
   }
 
-  .buyer-story-copy {
+  .buyer-journey-intro-copy {
     padding-bottom: 0;
   }
 
-  .buyer-story-gallery {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-top: 2.5rem;
-    padding-bottom: 0;
+  .buyer-expand-stage {
+    height: auto;
+    margin-top: 0;
+    padding-inline: var(--content-gutter);
   }
 
-  .buyer-story-primary,
-  .buyer-story-detail {
-    grid-column: 1;
+  .buyer-expand-sticky {
+    position: relative;
+    min-height: 0;
   }
 
-  .buyer-story-detail {
-    width: 62%;
-    justify-self: end;
-    padding-bottom: 0;
-  }
-
-  .buyer-story-primary-mask {
+  .buyer-expand-frame {
+    width: 100%;
+    height: auto;
     aspect-ratio: 4 / 3;
+    clip-path: inset(0);
   }
 
-  .buyer-story-detail-mask {
-    aspect-ratio: 4 / 5;
+  .buyer-expand-image {
+    transform: none;
+  }
+
+  .buyer-handoff {
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .buyer-handoff-image img {
+    aspect-ratio: 16 / 9;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .buyer-story-image-mask,
-  .buyer-story-image-mask img,
-  .buyer-story-heading,
-  .buyer-story-copy {
+  .buyer-expand-frame,
+  .buyer-expand-image,
+  .buyer-journey-heading,
+  .buyer-journey-intro-copy,
+  .buyer-handoff-image,
+  .buyer-handoff-copy {
     transform: none !important;
     opacity: 1 !important;
     clip-path: inset(0) !important;
