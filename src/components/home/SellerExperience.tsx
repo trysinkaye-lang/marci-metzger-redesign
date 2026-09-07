@@ -3,7 +3,12 @@ import { Container } from '../layout/Container'
 
 export function SellerExperience() {
   return (
-    <section id="selling" className="section seller-section" aria-labelledby="seller-heading">
+    <section id="selling" className="section seller-section seller-cinematic" aria-labelledby="seller-heading">
+      <div className="seller-media" aria-hidden="true">
+        <img src="/images/seller.jpg" alt="" width="2164" height="1440" loading="lazy" />
+        <span className="seller-media-shade" />
+      </div>
+
       <Container className="seller-layout">
         <div className="seller-copy stack">
           <p className="eyebrow">The seller experience</p>
@@ -11,7 +16,7 @@ export function SellerExperience() {
           <p>{siteContent.seller.description}</p>
           <a className="text-link" href="#contact">Discuss your home<span aria-hidden="true">↗</span></a>
         </div>
-        <figure className="seller-image"><img src="/images/seller.jpg" alt="" width="2164" height="1440" loading="lazy" /><figcaption>Get it sold. <span>With Marci Metzger.</span></figcaption></figure>
+        <p className="seller-signature">Marci Metzger · The Ridge Realty Group</p>
       </Container>
     </section>
   )
