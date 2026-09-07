@@ -1,0 +1,244 @@
+/*
+ * Services scroll stack
+ * ---------------------
+ * A restrained scrollytelling treatment inspired by 2026 editorial real-estate
+ * sites and React Bits Scroll Stack. Cards stack through normal page scroll;
+ * there is no blur, autoplay or decorative 3D.
+ */
+
+.services-story {
+  position: relative;
+  overflow: visible;
+  background: #171a17;
+  color: #f5f0e8;
+}
+
+.services-story > .container {
+  position: relative;
+}
+
+.services-story-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, .42fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+  padding-bottom: clamp(3rem, 5vw, 5rem);
+  border-bottom: 1px solid rgb(255 255 255 / 18%);
+}
+
+.services-story-intro .eyebrow {
+  margin: 0 0 1rem;
+  color: #c8ad92;
+}
+
+.services-story-intro h2 {
+  margin: 0;
+  font-size: clamp(4.4rem, 8vw, 8rem);
+  line-height: .78;
+  letter-spacing: -.055em;
+}
+
+.services-story-note {
+  max-width: 30ch;
+  margin: 0 0 .35rem;
+  color: rgb(245 240 232 / 65%);
+  font-size: .95rem;
+  line-height: 1.65;
+}
+
+.services-stack {
+  position: relative;
+  display: grid;
+  gap: 18svh;
+  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(5rem, 10vw, 10rem);
+}
+
+.service-card {
+  position: sticky;
+  top: 6.5rem;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr);
+  min-height: min(72svh, 48rem);
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 12%);
+  background: #f5f0e8;
+  color: #1b1b19;
+  box-shadow: 0 24px 70px rgb(0 0 0 / 20%);
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+.service-card-2 {
+  z-index: 2;
+}
+
+.service-card-3 {
+  z-index: 3;
+}
+
+.service-card:nth-child(even) {
+  grid-template-columns: minmax(22rem, .92fr) minmax(0, 1.08fr);
+}
+
+.service-card:nth-child(even) .service-card-media {
+  order: 2;
+}
+
+.service-card:nth-child(even) .service-card-copy {
+  order: 1;
+}
+
+.service-card-media {
+  position: relative;
+  min-height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #2a2d29;
+}
+
+.service-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+}
+
+.service-card-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  transform: scale(1.035);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.service-card-copy {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding: clamp(2rem, 4.5vw, 4.5rem);
+}
+
+.service-card-meta,
+.service-card-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  color: #8d7a68;
+  font-size: .62rem;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.service-card-meta {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(27 27 25 / 13%);
+}
+
+.service-card-body {
+  align-self: center;
+}
+
+.service-card-body h3 {
+  max-width: 9ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 5vw, 5.4rem);
+  font-weight: 400;
+  line-height: .86;
+  letter-spacing: -.045em;
+}
+
+.service-card-body p {
+  max-width: 43ch;
+  margin: clamp(1.5rem, 2.8vw, 2.6rem) 0 0;
+  color: #665f57;
+  font-size: clamp(.96rem, 1.05vw, 1.06rem);
+  line-height: 1.75;
+}
+
+.service-card-footer {
+  align-self: end;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(27 27 25 / 13%);
+  color: #746b61;
+}
+
+@media (max-width: 63.999rem) {
+  .services-story-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .services-story-intro h2 {
+    font-size: clamp(4.2rem, 11vw, 6.6rem);
+  }
+
+  .service-card,
+  .service-card:nth-child(even) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card-copy {
+    padding: clamp(1.8rem, 3vw, 2.8rem);
+  }
+
+  .service-card-body h3 {
+    font-size: clamp(2.8rem, 5.7vw, 4.1rem);
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .services-story {
+    overflow: hidden;
+  }
+
+  .services-stack {
+    gap: 1.5rem;
+    padding-top: 2rem;
+  }
+
+  .service-card,
+  .service-card:nth-child(even) {
+    position: relative;
+    top: auto;
+    grid-template-columns: 1fr;
+    min-height: 0;
+    box-shadow: none;
+  }
+
+  .service-card:nth-child(even) .service-card-media,
+  .service-card:nth-child(even) .service-card-copy {
+    order: initial;
+  }
+
+  .service-card-media {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .service-card-copy {
+    gap: 2rem;
+    padding: 1.6rem 1.35rem 1.5rem;
+  }
+
+  .service-card-body h3 {
+    font-size: clamp(2.9rem, 13vw, 4.25rem);
+  }
+
+  .service-card-footer {
+    align-items: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card-media img {
+    transform: none !important;
+  }
+}
