@@ -17,12 +17,11 @@ export function Hero() {
 
       <Container className="hero-content">
         <div className="hero-kicker-row">
-          <p className="eyebrow">Marci Metzger · The Ridge Realty Group</p>
           <p className="hero-location">{siteContent.hero.eyebrow}</p>
         </div>
 
         <div className="hero-copy">
-          <p className="hero-overline">Local expertise. Elevated service.</p>
+          <p className="hero-overline">Marci Metzger · The Ridge Realty Group</p>
           <h1 id="hero-heading"><span>Pahrump</span><span>Realtor</span></h1>
         </div>
 
@@ -36,7 +35,6 @@ export function Hero() {
               Search Listings<span aria-hidden="true">↘</span>
             </a>
           </div>
-          <a className="hero-scroll-link" href="#performance">Scroll to explore <span aria-hidden="true">↓</span></a>
         </div>
       </Container>
     </section>
