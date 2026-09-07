@@ -5,58 +5,45 @@ export function AboutMarci() {
   return (
     <section id="about" className="section about-section about-profile" aria-labelledby="about-heading" tabIndex={-1}>
       <Container>
-        <div className="about-layout about-profile-layout">
-          <div className="about-portrait-wrap">
-            <figure className="portrait-frame">
-              <img src="/images/marci-portrait.jpg" alt="Marci Metzger" width="1632" height="2449" loading="lazy" />
-              <figcaption>
-                <span>Marci Metzger</span>
-                <span>The Ridge Realty Group</span>
-              </figcaption>
-            </figure>
+        <div className="about-profile-shell">
+          <figure className="about-profile-portrait">
+            <img src="/images/marci-portrait.jpg" alt="Marci Metzger" width="1632" height="2449" loading="lazy" />
+            <figcaption>
+              <span>Marci Metzger</span>
+              <span>The Ridge Realty Group</span>
+            </figcaption>
+          </figure>
 
-            <div className="about-experience-badge" aria-label="Nearly 3 decades in real estate">
-              <span className="about-experience-kicker">Nearly</span>
-              <strong>3</strong>
-              <span>Decades</span>
-            </div>
-          </div>
-
-          <div className="about-copy about-profile-copy">
-            <div className="about-profile-heading">
-              <p className="eyebrow">Meet Marci</p>
-              <h2 id="about-heading">{siteContent.about.title}</h2>
-            </div>
-
-            <div className="about-profile-divider" aria-hidden="true" />
-
-            <div className="about-profile-story">
-              <p className="lead">{siteContent.about.subtitle}</p>
-              <p>{siteContent.performance.description}</p>
-            </div>
-
-            <div className="about-profile-meta" aria-label="Marci Metzger profile details">
-              <div>
-                <span>Market</span>
-                <strong>Pahrump, Nevada</strong>
-              </div>
-              <div>
-                <span>Company</span>
-                <strong>The Ridge Realty Group</strong>
-              </div>
-            </div>
+          <div className="about-profile-content">
+            <p className="eyebrow">Meet Marci</p>
+            <h2 id="about-heading">{siteContent.about.title}</h2>
+            <p className="about-profile-role">{siteContent.about.subtitle}</p>
+            <div className="about-profile-rule" aria-hidden="true" />
+            <p className="about-profile-story">{siteContent.performance.description}</p>
 
             <a className="text-link about-profile-link" href="#contact">
               Let&apos;s Move<span aria-hidden="true">↗</span>
             </a>
+
+            <dl className="about-profile-detailbar" aria-label="Marci Metzger profile details">
+              <div>
+                <dt>Market</dt>
+                <dd>Pahrump, Nevada</dd>
+              </div>
+              <div>
+                <dt>Experience</dt>
+                <dd>Nearly 3 decades</dd>
+              </div>
+              <div>
+                <dt>Company</dt>
+                <dd>The Ridge Realty Group</dd>
+              </div>
+            </dl>
           </div>
         </div>
 
-        <div className="affiliation-strip about-affiliations">
-          <div>
-            <p className="eyebrow">Professional affiliations</p>
-            <p className="about-affiliations-note">Pahrump, Nevada</p>
-          </div>
+        <div className="about-affiliations">
+          <p className="eyebrow">Professional affiliations</p>
           <ul className="affiliation-list" aria-label="Professional affiliations">
             {siteContent.affiliations.map((item) => (
               <li key={item.image}>
