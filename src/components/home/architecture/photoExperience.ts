@@ -18,7 +18,7 @@ export function createPhotoExperience(section: HTMLElement, signal: AbortSignal)
   const chapter = section.querySelector<HTMLElement>('.architecture-chapter')
   if (!stage || !copy || !caption || !chapter) throw new Error('Hero structure is incomplete')
 
-  let trigger: ScrollTrigger | undefined
+  const triggerRef: { current?: ScrollTrigger } = {}
   let disposed = false
 
   const cssVariables = [
@@ -33,7 +33,7 @@ export function createPhotoExperience(section: HTMLElement, signal: AbortSignal)
   const dispose = () => {
     if (disposed) return
     disposed = true
-    trigger?.kill()
+    triggerRef.current?.kill()
     copy.inert = false
     caption.inert = false
     cssVariables.forEach((key) => section.style.removeProperty(key))
@@ -123,7 +123,7 @@ export function createPhotoExperience(section: HTMLElement, signal: AbortSignal)
   section.dataset.ready = 'true'
   update(0)
 
-  trigger = ScrollTrigger.create({
+  triggerRef.current = ScrollTrigger.create({
     trigger: section,
     start: 'top 96px',
     end: () => `+=${section.offsetHeight - stage.offsetHeight}`,
@@ -133,6 +133,6 @@ export function createPhotoExperience(section: HTMLElement, signal: AbortSignal)
   })
 
   signal.addEventListener('abort', dispose, { once: true })
-  update(trigger.progress)
+  update(triggerRef.current.progress)
   return dispose
 }
