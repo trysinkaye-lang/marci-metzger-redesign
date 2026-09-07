@@ -192,6 +192,60 @@ export function useEditorialMotion() {
             },
           },
         )
+
+        const serviceCards = gsap.utils.toArray<HTMLElement>('.service-card')
+
+        serviceCards.forEach((card, index) => {
+          const image = card.querySelector<HTMLElement>('.service-card-media img')
+          const body = card.querySelector<HTMLElement>('.service-card-body')
+
+          if (image) {
+            gsap.fromTo(
+              image,
+              { scale: 1.06 },
+              {
+                scale: 1.015,
+                ease: 'none',
+                scrollTrigger: {
+                  trigger: card,
+                  start: 'top bottom',
+                  end: 'bottom top',
+                  scrub: 1,
+                },
+              },
+            )
+          }
+
+          if (body) {
+            gsap.from(body, {
+              opacity: 0,
+              y: 24,
+              duration: 0.75,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top 72%',
+                toggleActions: 'play none none reverse',
+              },
+            })
+          }
+
+          const nextCard = serviceCards[index + 1]
+          if (nextCard) {
+            gsap.to(card, {
+              scale: 0.965,
+              opacity: 0.44,
+              y: -10,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: nextCard,
+                start: 'top 88%',
+                end: 'top 20%',
+                scrub: 0.8,
+              },
+            })
+          }
+        })
       })
 
       const stage = document.querySelector<HTMLElement>('.hero-motion-stage')
