@@ -12,6 +12,7 @@ import './styles/property-search.css'
 import './styles/hero-motion.css'
 import './styles/services-motion.css'
 import './styles/buyer-story.css'
+import './styles/contact-map.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
