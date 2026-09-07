@@ -1,0 +1,82 @@
+name: Hydrate source assets
+
+on:
+  push:
+    branches:
+      - feature/phase3-reference-3d
+    paths:
+      - '.github/workflows/hydrate-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  hydrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/phase3-reference-3d
+          fetch-depth: 0
+
+      - name: Restore original Marci imagery
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/images public/architecture public/fonts
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/blob-6c0c2e0.png' -o public/images/brand-logo.png
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/photo-5db79f9.jpg' -o public/images/marci-portrait.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/stock/3395' -o public/images/performance.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/stock/107927' -o public/images/seller.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/stock/771' -o public/images/buyer.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/BIG%20CIRCLE%202.png' -o public/images/ridge-logo.png
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/Equal%20Housing%20Logo.png' -o public/images/equal-housing-logo.png
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/Realtor%20Pin.jpg' -o public/images/realtor-logo.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/Chamber.jpg' -o public/images/chamber-logo.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/stock/12792' -o public/images/real-estate-service.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/stock/43920' -o public/images/commercial-residential.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/stock/kayaJdA' -o public/images/expertise.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/mtn%20falls%20pond.jpg' -o public/images/hero.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/getty/2223376026' -o public/images/property-search.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4460%20Roseworthy-52.jpg-SMALL.JPG' -o public/images/gallery-01.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-14.jpg-SMALL.JPG' -o public/images/gallery-02.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-45.jpg-SMALL.JPG' -o public/images/gallery-03.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/5570%20Ailanto-50.jpg-SMALL.JPG' -o public/images/gallery-04.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-54.jpg-SMALL.JPG' -o public/images/gallery-05.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-53.jpg-SMALL.JPG' -o public/images/gallery-06.jpg
+          curl -L --fail --retry 3 'https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/4787%20E%20Beacon%20Ridge-41.jpg-SMALL.JPG' -o public/images/gallery-07.jpg
+
+      - name: Restore CC0 architectural materials and fonts
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/beige_wall_001/beige_wall_001_diff_1k.jpg' -o public/architecture/beige_wall_001-Diffuse.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/beige_wall_001/beige_wall_001_nor_gl_1k.jpg' -o public/architecture/beige_wall_001-nor_gl.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles/clay_roof_tiles_diff_1k.jpg' -o public/architecture/clay_roof_tiles-Diffuse.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/clay_roof_tiles/clay_roof_tiles_nor_gl_1k.jpg' -o public/architecture/clay_roof_tiles-nor_gl.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_table_001/wood_table_001_diff_1k.jpg' -o public/architecture/wood_table_001-Diffuse.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/wood_table_001/wood_table_001_nor_gl_1k.jpg' -o public/architecture/wood_table_001-nor_gl.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/stone_wall_02/stone_wall_02_diff_1k.jpg' -o public/architecture/stone_wall_02-Diffuse.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/stone_wall_02/stone_wall_02_nor_gl_1k.jpg' -o public/architecture/stone_wall_02-nor_gl.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/goegap_1k.hdr' -o public/architecture/goegap-hdri.hdr
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/sandy_gravel/sandy_gravel_diff_1k.jpg' -o public/architecture/sandy_gravel-Diffuse.jpg
+          curl -L --fail --retry 3 'https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/sandy_gravel/sandy_gravel_nor_gl_1k.jpg' -o public/architecture/sandy_gravel-nor_gl.jpg
+          curl -L --fail --retry 3 'https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtK.woff2' -o public/fonts/cormorant-garamond-latin.woff2
+          curl -L --fail --retry 3 'https://fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRggexSg.woff2' -o public/fonts/manrope-latin.woff2
+
+      - name: Generate lockfile and validate
+        shell: bash
+        run: |
+          npm install --package-lock-only --ignore-scripts
+          npm ci
+          npm run lint
+          npm run build
+
+      - name: Commit hydrated assets
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public package-lock.json
+          git commit -m 'Hydrate original assets and lockfile [skip ci]'
+          git push origin HEAD:feature/phase3-reference-3d
