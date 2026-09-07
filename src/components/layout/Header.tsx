@@ -2,64 +2,73 @@ import { useEffect, useRef, useState } from 'react'
 import { siteContent } from '../../data/siteContent'
 import { Container } from './Container'
 
-const primaryLinks = siteContent.navigation.filter((link) =>
-  ['#property-search', '#about', '#contact'].includes(link.href),
-)
+const compactNavigation = siteContent.navigation.filter((link) => link.href !== '#home')
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButton = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 64rem)')
-    const closeOnDesktop = () => { if (desktop.matches) setMenuOpen(false) }
-    desktop.addEventListener('change', closeOnDesktop)
-    return () => desktop.removeEventListener('change', closeOnDesktop)
-  }, [])
+    if (!menuOpen) return
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen])
 
   return (
-    <header
-      className="site-header"
-      onKeyDown={(event) => {
-        if (event.key === 'Escape' && menuOpen) {
-          setMenuOpen(false)
-          menuButton.current?.focus()
-        }
-      }}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false)
-      }}
-    >
-      <Container className="header-content">
-        <a className="brand" href="#home" aria-label={`${siteContent.brand} — Home`}>
+    <header className="site-header minimal-header">
+      <Container className="minimal-header-bar">
+        <a className="brand minimal-brand" href="#home" aria-label={`${siteContent.brand} — Home`}>
           <img src="/images/brand-logo.png" alt={siteContent.brand} width="536" height="167" />
         </a>
 
         <button
           ref={menuButton}
-          className="menu-toggle"
+          className="minimal-menu-toggle"
           type="button"
           aria-expanded={menuOpen}
-          aria-controls="site-navigation"
-          onClick={() => setMenuOpen(!menuOpen)}
+          aria-controls="minimal-site-menu"
+          onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? 'Close' : 'Menu'}
-          <span className="menu-mark" aria-hidden="true"><span /><span /></span>
+          <span>{menuOpen ? 'Close' : 'Menu'}</span>
+          <span className="minimal-menu-icon" aria-hidden="true">
+            <span />
+            <span />
+          </span>
         </button>
-
-        <nav id="site-navigation" className="site-navigation" data-open={menuOpen} aria-label="Main navigation">
-          <ul className="navigation-list">
-            {primaryLinks.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>
-              </li>
-            ))}
-          </ul>
-          <a className="header-call" href={siteContent.contact.phoneHref} aria-label={`Call Marci at ${siteContent.contact.phone}`}>
-            Call Marci
-          </a>
-        </nav>
       </Container>
+
+      <div id="minimal-site-menu" className="minimal-menu-panel" data-open={menuOpen} hidden={!menuOpen}>
+        <Container className="minimal-menu-inner">
+          <nav aria-label="Main navigation">
+            <ul className="minimal-menu-list">
+              {compactNavigation.map((link, index) => (
+                <li key={link.href}>
+                  <a href={link.href} onClick={() => setMenuOpen(false)}>
+                    <span className="minimal-menu-index" aria-hidden="true">0{index + 1}</span>
+                    <span>{link.label}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="minimal-menu-contact">
+            <p className="eyebrow">Speak with Marci</p>
+            <a className="minimal-menu-phone" href={siteContent.contact.phoneHref}>
+              {siteContent.contact.phone}
+            </a>
+            <p>{siteContent.hero.eyebrow}</p>
+          </div>
+        </Container>
+      </div>
     </header>
   )
 }
