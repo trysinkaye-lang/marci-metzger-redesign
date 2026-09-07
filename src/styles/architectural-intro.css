@@ -5,6 +5,10 @@
  * a pinned, reversible sequence: Pahrump establishing shot -> photographic facade
  * opens -> real interior -> outdoor/pool -> community -> ivory handoff. Mobile and
  * reduced-motion users retain the normal static hero.
+ *
+ * Important image-quality rule: the gallery files originated from "-SMALL.JPG"
+ * assets and are intentionally NOT used as full-viewport cinematic backgrounds.
+ * Full-screen stages use the larger source-site hero/stock imagery instead.
  */
 .hero-stage { position: relative; isolation: isolate; min-height: inherit; }
 .hero::before { display: none; }
@@ -79,11 +83,11 @@
   .architecture-backplate {
     position: absolute;
     z-index: 0;
-    inset: -3%;
+    inset: -1%;
     opacity: var(--backplate-opacity, 1);
     background: url('/images/hero.jpg') center 56% / cover no-repeat;
-    filter: saturate(.82) contrast(1.02) brightness(.96);
-    transform: scale(var(--backplate-scale, 1.06));
+    filter: saturate(.92) contrast(1.015) brightness(.98);
+    transform: scale(var(--backplate-scale, 1.035));
     transform-origin: 50% 54%;
     will-change: transform, opacity;
   }
@@ -92,8 +96,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 52% 48%, transparent 32%, rgb(12 16 14 / 11%) 100%),
-      linear-gradient(180deg, rgb(247 239 225 / 3%), transparent 48%, rgb(22 21 18 / 15%));
+      radial-gradient(circle at 52% 48%, transparent 32%, rgb(12 16 14 / 8%) 100%),
+      linear-gradient(180deg, rgb(247 239 225 / 2%), transparent 48%, rgb(22 21 18 / 12%));
   }
 
   .journey-photo-stack {
@@ -116,7 +120,7 @@
   .journey-photo::before {
     content: '';
     position: absolute;
-    inset: -3%;
+    inset: -1%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -126,48 +130,48 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(circle at 52% 42%, transparent 26%, rgb(12 16 14 / 12%) 100%),
-      linear-gradient(90deg, rgb(17 22 20 / 14%), transparent 43%),
-      linear-gradient(180deg, transparent 60%, rgb(16 19 17 / 26%));
+      radial-gradient(circle at 52% 42%, transparent 29%, rgb(12 16 14 / 8%) 100%),
+      linear-gradient(90deg, rgb(17 22 20 / 11%), transparent 43%),
+      linear-gradient(180deg, transparent 62%, rgb(16 19 17 / 19%));
   }
 
+  /* Larger source-site images are used here to avoid upscaling the gallery SMALL.JPG files. */
   .journey-photo-interior {
     z-index: 1;
     opacity: var(--photo-interior-opacity, 0);
     transform-origin: 50% 58%;
   }
   .journey-photo-interior::before {
-    background-image: url('/images/gallery-02.jpg');
+    background-image: url('/images/buyer.jpg');
     background-position: center 50%;
-    transform: translateX(var(--photo-interior-x, 2.8%)) scale(var(--photo-interior-scale, 1.12));
-    filter: saturate(.96) contrast(1.025) brightness(.98);
+    transform: translateX(var(--photo-interior-x, 1.2%)) scale(var(--photo-interior-scale, 1.045));
+    filter: saturate(.99) contrast(1.01);
   }
   .journey-photo-outdoor {
     z-index: 2;
     opacity: var(--photo-outdoor-opacity, 0);
   }
   .journey-photo-outdoor::before {
-    background-image: url('/images/gallery-04.jpg');
-    background-position: center 52%;
-    transform: translateY(var(--photo-outdoor-y, 2.5%)) scale(var(--photo-outdoor-scale, 1.09));
-    filter: saturate(.97) contrast(1.02);
+    background-image: url('/images/seller.jpg');
+    background-position: center 55%;
+    transform: translateY(var(--photo-outdoor-y, 1%)) scale(var(--photo-outdoor-scale, 1.04));
+    filter: saturate(.99) contrast(1.01);
   }
   .journey-photo-community {
     z-index: 3;
     opacity: var(--photo-community-opacity, 0);
   }
   .journey-photo-community::before {
-    background-image: url('/images/gallery-01.jpg');
-    background-position: center 48%;
-    transform: scale(var(--photo-community-scale, 1.075));
-    filter: saturate(.98) contrast(1.02);
+    background-image: url('/images/hero.jpg');
+    background-position: center 55%;
+    transform: scale(var(--photo-community-scale, 1.03));
+    filter: saturate(.99) contrast(1.01);
   }
 
   /*
-   * Photographic architectural reveal. Two halves of the actual exterior image
-   * occupy the full viewport and physically separate as the user scrolls. Because
-   * the real interior is already underneath, the opening reads as a property
-   * reveal rather than a slideshow or game render.
+   * Photographic architectural reveal. The property-search source image is used
+   * instead of gallery-03 (a SMALL.JPG asset), keeping the split facade crisp on
+   * large screens while the real interior image sits underneath it.
    */
   .journey-threshold {
     position: absolute;
@@ -175,7 +179,7 @@
     inset: 0;
     overflow: hidden;
     opacity: var(--threshold-opacity, 0);
-    transform: scale(var(--threshold-scale, 1.075));
+    transform: scale(var(--threshold-scale, 1.035));
     transform-origin: 50% 52%;
     will-change: transform, opacity;
   }
@@ -194,8 +198,8 @@
     top: 0;
     bottom: 0;
     width: 200%;
-    background: url('/images/gallery-03.jpg') center 52% / cover no-repeat;
-    filter: saturate(.93) contrast(1.035) brightness(.96);
+    background: url('/images/property-search.jpg') center 50% / cover no-repeat;
+    filter: saturate(.99) contrast(1.015) brightness(.98);
   }
   .threshold-panel-left {
     left: 0;
@@ -329,8 +333,8 @@
   .hero[data-hero-mode="architecture"] .hero-copy { max-width: 36rem; }
   .architecture-scroll { display: none; }
   .architecture-note { max-width: 25ch; }
-  .journey-photo-interior::before { background-position: 54% 52%; }
-  .journey-photo-outdoor::before { background-position: 52% 54%; }
+  .journey-photo-interior::before { background-position: center 52%; }
+  .journey-photo-outdoor::before { background-position: center 54%; }
   .threshold-panel::before { background-position: center 50%; }
 }
 
