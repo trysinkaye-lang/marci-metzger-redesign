@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { siteContent } from '../../data/siteContent'
 import { Container } from './Container'
 
+const primaryLinks = siteContent.navigation.filter((link) =>
+  ['#property-search', '#about', '#contact'].includes(link.href),
+)
+
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButton = useRef<HTMLButtonElement>(null)
@@ -30,6 +34,7 @@ export function Header() {
         <a className="brand" href="#home" aria-label={`${siteContent.brand} — Home`}>
           <img src="/images/brand-logo.png" alt={siteContent.brand} width="536" height="167" />
         </a>
+
         <button
           ref={menuButton}
           className="menu-toggle"
@@ -41,18 +46,18 @@ export function Header() {
           {menuOpen ? 'Close' : 'Menu'}
           <span className="menu-mark" aria-hidden="true"><span /><span /></span>
         </button>
+
         <nav id="site-navigation" className="site-navigation" data-open={menuOpen} aria-label="Main navigation">
           <ul className="navigation-list">
-            {siteContent.navigation.map((link) => (
+            {primaryLinks.map((link) => (
               <li key={link.href}>
-                <a href={link.href} onClick={() => {
-                  setMenuOpen(false)
-                  document.querySelector<HTMLElement>(link.href)?.focus({ preventScroll: true })
-                }}>{link.label}</a>
+                <a href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>
               </li>
             ))}
           </ul>
-          <a className="header-call" href={siteContent.contact.phoneHref}>{siteContent.contact.phone}</a>
+          <a className="header-call" href={siteContent.contact.phoneHref} aria-label={`Call Marci at ${siteContent.contact.phone}`}>
+            Call Marci
+          </a>
         </nav>
       </Container>
     </header>
