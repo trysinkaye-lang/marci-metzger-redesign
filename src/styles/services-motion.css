@@ -1,244 +1,354 @@
 /*
- * Services scroll stack
- * ---------------------
- * A restrained scrollytelling treatment inspired by 2026 editorial real-estate
- * sites and React Bits Scroll Stack. Cards stack through normal page scroll;
- * there is no blur, autoplay or decorative 3D.
+ * Services cinematic rail
+ * ----------------------
+ * A full-viewport horizontal story inspired by current luxury real-estate,
+ * hospitality and Awwwards-style scroll galleries. Motion is scroll-driven,
+ * restrained and fully reversible. Mobile falls back to a normal vertical flow.
  */
 
-.services-story {
+.services-cinema {
   position: relative;
-  overflow: visible;
+  overflow: clip;
   background: #171a17;
   color: #f5f0e8;
 }
 
-.services-story > .container {
-  position: relative;
-}
-
-.services-story-intro {
+.services-cinema-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(18rem, .42fr);
-  gap: clamp(2rem, 6vw, 6rem);
+  grid-template-columns: minmax(0, 1.15fr) minmax(17rem, .45fr);
+  gap: clamp(2rem, 7vw, 7rem);
   align-items: end;
-  padding-bottom: clamp(3rem, 5vw, 5rem);
-  border-bottom: 1px solid rgb(255 255 255 / 18%);
+  padding-top: clamp(5rem, 8vw, 8rem);
+  padding-bottom: clamp(3.5rem, 6vw, 6rem);
 }
 
-.services-story-intro .eyebrow {
+.services-cinema-intro .eyebrow {
   margin: 0 0 1rem;
   color: #c8ad92;
 }
 
-.services-story-intro h2 {
+.services-cinema-intro h2 {
+  max-width: 8ch;
   margin: 0;
-  font-size: clamp(4.4rem, 8vw, 8rem);
-  line-height: .78;
-  letter-spacing: -.055em;
+  font-size: clamp(4.8rem, 9vw, 9rem);
+  font-weight: 400;
+  line-height: .76;
+  letter-spacing: -.06em;
 }
 
-.services-story-note {
+.services-cinema-intro-copy {
+  align-self: end;
+  padding-bottom: .35rem;
+}
+
+.services-cinema-intro-copy p {
   max-width: 30ch;
-  margin: 0 0 .35rem;
-  color: rgb(245 240 232 / 65%);
-  font-size: .95rem;
-  line-height: 1.65;
+  margin: 0;
+  color: rgb(245 240 232 / 68%);
+  font-size: clamp(.95rem, 1.1vw, 1.08rem);
+  line-height: 1.7;
 }
 
-.services-stack {
+.services-cinema-intro-copy span {
+  display: inline-block;
+  margin-top: 1.5rem;
+  color: #c8ad92;
+  font-size: .62rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.services-cinema-stage {
+  position: relative;
+  height: 300svh;
+}
+
+.services-cinema-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: #171a17;
+}
+
+.services-cinema-progress {
+  position: absolute;
+  z-index: 4;
+  top: clamp(1.2rem, 2vw, 2rem);
+  right: max(var(--content-gutter), 3vw);
+  left: max(var(--content-gutter), 3vw);
+  display: grid;
+  grid-template-columns: auto minmax(5rem, 12rem) auto;
+  gap: .85rem;
+  align-items: center;
+  color: rgb(245 240 232 / 64%);
+  font-size: .58rem;
+  letter-spacing: .14em;
+}
+
+.services-cinema-progress-track {
+  position: relative;
+  height: 1px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 18%);
+}
+
+.services-cinema-progress-fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: #e7d6c3;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.services-cinema-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  will-change: transform;
+}
+
+.service-scene {
   position: relative;
   display: grid;
-  gap: 18svh;
-  padding-top: clamp(3rem, 5vw, 5rem);
-  padding-bottom: clamp(5rem, 10vw, 10rem);
+  width: 100vw;
+  height: 100svh;
+  grid-template-columns: minmax(0, 1.45fr) minmax(26rem, .72fr);
+  background: #eee8de;
+  color: #1c1c19;
 }
 
-.service-card {
-  position: sticky;
-  top: 6.5rem;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(22rem, .92fr);
-  min-height: min(72svh, 48rem);
-  overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 12%);
-  background: #f5f0e8;
-  color: #1b1b19;
-  box-shadow: 0 24px 70px rgb(0 0 0 / 20%);
-  transform-origin: top center;
-  will-change: transform, opacity;
+.service-scene:nth-child(even) {
+  grid-template-columns: minmax(26rem, .72fr) minmax(0, 1.45fr);
 }
 
-.service-card-2 {
-  z-index: 2;
-}
-
-.service-card-3 {
-  z-index: 3;
-}
-
-.service-card:nth-child(even) {
-  grid-template-columns: minmax(22rem, .92fr) minmax(0, 1.08fr);
-}
-
-.service-card:nth-child(even) .service-card-media {
+.service-scene:nth-child(even) .service-scene-media {
   order: 2;
 }
 
-.service-card:nth-child(even) .service-card-copy {
+.service-scene:nth-child(even) .service-scene-copy {
   order: 1;
 }
 
-.service-card-media {
+.service-scene-media {
   position: relative;
-  min-height: 100%;
+  min-width: 0;
   margin: 0;
   overflow: hidden;
-  background: #2a2d29;
+  background: #2b2e2a;
 }
 
-.service-card-media::after {
+.service-scene-media::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+  background: linear-gradient(180deg, transparent 58%, rgb(10 12 10 / 15%) 100%);
 }
 
-.service-card-media img {
+.service-scene-media img {
   display: block;
   width: 100%;
   height: 100%;
-  min-height: inherit;
   object-fit: cover;
-  transform: scale(1.035);
+  transform: scale(1.055);
   transform-origin: center;
   will-change: transform;
 }
 
-.service-card-copy {
+.service-scene-copy {
+  position: relative;
   display: grid;
+  min-width: 0;
   grid-template-rows: auto 1fr auto;
-  gap: clamp(2rem, 4vw, 4rem);
-  padding: clamp(2rem, 4.5vw, 4.5rem);
+  padding: clamp(4.7rem, 7vw, 7rem) clamp(2.25rem, 4.4vw, 4.8rem) clamp(2.2rem, 3vw, 3rem);
+  border-left: 1px solid rgb(27 27 25 / 10%);
+  background: #f3eee5;
 }
 
-.service-card-meta,
-.service-card-footer {
+.service-scene:nth-child(even) .service-scene-copy {
+  border-right: 1px solid rgb(27 27 25 / 10%);
+  border-left: 0;
+}
+
+.service-scene-meta,
+.service-scene-footer {
   display: flex;
   justify-content: space-between;
-  gap: 1.5rem;
-  color: #8d7a68;
-  font-size: .62rem;
+  gap: 1.25rem;
+  color: #8c7865;
+  font-size: .59rem;
   letter-spacing: .13em;
   text-transform: uppercase;
 }
 
-.service-card-meta {
+.service-scene-meta {
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgb(27 27 25 / 13%);
+  border-bottom: 1px solid rgb(27 27 25 / 12%);
 }
 
-.service-card-body {
+.service-scene-body {
   align-self: center;
+  max-width: 38rem;
 }
 
-.service-card-body h3 {
-  max-width: 9ch;
+.service-scene-body .eyebrow {
+  margin: 0 0 1rem;
+  color: #9d826a;
+}
+
+.service-scene-body h3 {
+  max-width: 8ch;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(3.25rem, 5vw, 5.4rem);
+  font-size: clamp(3.6rem, 5.6vw, 6.2rem);
   font-weight: 400;
-  line-height: .86;
-  letter-spacing: -.045em;
+  line-height: .82;
+  letter-spacing: -.052em;
 }
 
-.service-card-body p {
-  max-width: 43ch;
-  margin: clamp(1.5rem, 2.8vw, 2.6rem) 0 0;
-  color: #665f57;
-  font-size: clamp(.96rem, 1.05vw, 1.06rem);
+.service-scene-body > p:last-child {
+  max-width: 42ch;
+  margin: clamp(1.6rem, 2.7vw, 2.7rem) 0 0;
+  color: #655d54;
+  font-size: clamp(.97rem, 1.05vw, 1.08rem);
   line-height: 1.75;
 }
 
-.service-card-footer {
+.service-scene-footer {
   align-self: end;
   padding-top: 1rem;
-  border-top: 1px solid rgb(27 27 25 / 13%);
-  color: #746b61;
+  border-top: 1px solid rgb(27 27 25 / 12%);
+  color: #776d62;
 }
 
 @media (max-width: 63.999rem) {
-  .services-story-intro {
+  .services-cinema-intro {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .services-story-intro h2 {
-    font-size: clamp(4.2rem, 11vw, 6.6rem);
+  .services-cinema-intro h2 {
+    font-size: clamp(4.5rem, 11vw, 7rem);
   }
 
-  .service-card,
-  .service-card:nth-child(even) {
-    grid-template-columns: 1fr 1fr;
+  .service-scene,
+  .service-scene:nth-child(even) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .9fr);
   }
 
-  .service-card-copy {
-    padding: clamp(1.8rem, 3vw, 2.8rem);
+  .service-scene-copy {
+    padding-inline: clamp(1.8rem, 3.5vw, 3rem);
   }
 
-  .service-card-body h3 {
-    font-size: clamp(2.8rem, 5.7vw, 4.1rem);
+  .service-scene-body h3 {
+    font-size: clamp(3.2rem, 6.2vw, 4.9rem);
   }
 }
 
 @media (max-width: 47.999rem) {
-  .services-story {
+  .services-cinema {
     overflow: hidden;
   }
 
-  .services-stack {
-    gap: 1.5rem;
-    padding-top: 2rem;
+  .services-cinema-intro {
+    padding-top: 4.5rem;
+    padding-bottom: 2.5rem;
   }
 
-  .service-card,
-  .service-card:nth-child(even) {
+  .services-cinema-intro h2 {
+    font-size: clamp(4rem, 18vw, 5.7rem);
+  }
+
+  .services-cinema-intro-copy span {
+    display: none;
+  }
+
+  .services-cinema-stage {
+    height: auto;
+  }
+
+  .services-cinema-pin {
     position: relative;
-    top: auto;
-    grid-template-columns: 1fr;
-    min-height: 0;
-    box-shadow: none;
+    height: auto;
+    overflow: visible;
   }
 
-  .service-card:nth-child(even) .service-card-media,
-  .service-card:nth-child(even) .service-card-copy {
+  .services-cinema-progress {
+    display: none;
+  }
+
+  .services-cinema-track {
+    display: grid;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .service-scene,
+  .service-scene:nth-child(even) {
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .service-scene:nth-child(even) .service-scene-media,
+  .service-scene:nth-child(even) .service-scene-copy {
     order: initial;
   }
 
-  .service-card-media {
-    min-height: 0;
+  .service-scene-media {
     aspect-ratio: 4 / 3;
   }
 
-  .service-card-copy {
-    gap: 2rem;
-    padding: 1.6rem 1.35rem 1.5rem;
+  .service-scene-copy,
+  .service-scene:nth-child(even) .service-scene-copy {
+    min-height: 31rem;
+    padding: 2rem 1.35rem 1.5rem;
+    border: 0;
   }
 
-  .service-card-body h3 {
-    font-size: clamp(2.9rem, 13vw, 4.25rem);
+  .service-scene-body h3 {
+    font-size: clamp(3.1rem, 14vw, 4.4rem);
   }
 
-  .service-card-footer {
-    align-items: flex-end;
+  .service-scene + .service-scene {
+    border-top: 1px solid rgb(27 27 25 / 13%);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .service-card,
-  .service-card-media img {
+  .services-cinema-stage {
+    height: auto;
+  }
+
+  .services-cinema-pin {
+    position: relative;
+    height: auto;
+  }
+
+  .services-cinema-progress {
+    display: none;
+  }
+
+  .services-cinema-track {
+    display: grid;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .service-scene,
+  .service-scene:nth-child(even) {
+    width: 100%;
+    height: auto;
+    min-height: 70svh;
+  }
+
+  .service-scene-media img {
     transform: none !important;
   }
 }
