@@ -23,7 +23,7 @@ export function Header() {
   }, [menuOpen])
 
   return (
-    <header className="site-header minimal-header">
+    <header className="site-header minimal-header" data-menu-open={menuOpen}>
       <Container className="minimal-header-bar">
         <a className="brand minimal-brand" href="#home" aria-label={`${siteContent.brand} — Home`}>
           <img src="/images/brand-logo.png" alt={siteContent.brand} width="536" height="167" />
