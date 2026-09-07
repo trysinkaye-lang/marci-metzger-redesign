@@ -281,8 +281,7 @@ export function useEditorialMotion() {
 
         if (servicesStage && servicesTrack) {
           gsap.set('.service-scene-2 .service-scene-copy, .service-scene-3 .service-scene-copy', {
-            opacity: 0.34,
-            x: 34,
+            x: 18,
           })
 
           const servicesTimeline = gsap.timeline({
@@ -323,8 +322,7 @@ export function useEditorialMotion() {
             .to(
               '.service-scene-1 .service-scene-copy',
               {
-                opacity: 0.45,
-                x: -28,
+                x: -12,
                 ease: 'none',
               },
               0.18,
@@ -332,7 +330,6 @@ export function useEditorialMotion() {
             .to(
               '.service-scene-2 .service-scene-copy',
               {
-                opacity: 1,
                 x: 0,
                 ease: 'power2.out',
               },
@@ -341,8 +338,7 @@ export function useEditorialMotion() {
             .to(
               '.service-scene-2 .service-scene-copy',
               {
-                opacity: 0.45,
-                x: -28,
+                x: -12,
                 ease: 'none',
               },
               0.61,
@@ -350,7 +346,6 @@ export function useEditorialMotion() {
             .to(
               '.service-scene-3 .service-scene-copy',
               {
-                opacity: 1,
                 x: 0,
                 ease: 'power2.out',
               },
