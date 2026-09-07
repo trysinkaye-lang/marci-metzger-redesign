@@ -2,6 +2,9 @@ import { siteContent } from '../../data/siteContent'
 import { useBuyerJourneyMotion } from '../../hooks/useBuyerJourneyMotion'
 import { Container } from '../layout/Container'
 
+const buyerIntro = 'Nobody knows the market like we do. Enjoy having a pro at your service.'
+const buyerDetail = 'Market analysis, upgrades lists, contractors on speed dial, & more!'
+
 export function BuyerExperience() {
   useBuyerJourneyMotion()
 
@@ -14,7 +17,7 @@ export function BuyerExperience() {
         </div>
 
         <div className="buyer-journey-intro-copy">
-          <p>{siteContent.buyer.description}</p>
+          <p>{buyerIntro}</p>
           <a className="text-link" href="#property-search">
             Find your next home<span aria-hidden="true">↗</span>
           </a>
@@ -43,7 +46,7 @@ export function BuyerExperience() {
 
         <div className="buyer-handoff-copy">
           <p className="eyebrow">Buyer guidance</p>
-          <p>{siteContent.buyer.description}</p>
+          <p>{buyerDetail}</p>
           <a className="text-link" href="#property-search">
             Search listings<span aria-hidden="true">↗</span>
           </a>
