@@ -1,0 +1,259 @@
+/*
+ * Visual cleanup pass
+ * -------------------
+ * Keeps the strongest editorial ideas while removing decorative layers that made
+ * the page feel busy. The goal is simpler hierarchy, more breathing room, and a
+ * clearer luxury-real-estate rhythm.
+ */
+
+body {
+  background: var(--editorial-cream);
+}
+
+/* Hero: keep the large typography, remove extra framing/details. */
+.hero-editorial::after,
+.hero-kicker-row::before {
+  display: none;
+}
+
+.hero-kicker-row {
+  border-bottom-color: rgb(255 255 255 / 22%);
+}
+
+.hero-editorial h1 {
+  text-shadow: none;
+}
+
+/* Results: still overlaps, but behaves like a quiet fact panel. */
+.performance-section {
+  margin-top: -1.25rem;
+  box-shadow: none;
+}
+
+/* Remove decorative typography and section numbering. */
+.about-layout::before,
+.about-copy::before,
+.seller-cinematic .seller-copy::before,
+.buyer-layout::before,
+.services-heading::before,
+.contact-heading::before,
+.contact-section::before,
+.portrait-frame::after {
+  display: none;
+}
+
+/* About: calm two-column editorial profile. */
+.about-section {
+  padding-top: clamp(6rem, 9vw, 9rem);
+}
+
+.about-copy h2 {
+  font-size: clamp(3.7rem, 6vw, 6.2rem);
+  line-height: .86;
+}
+
+.affiliation-strip {
+  margin-top: clamp(3rem, 5vw, 5rem);
+}
+
+/* Search: keep the image-led layout without grid-breaking or overlap. */
+.search-story {
+  width: 100%;
+  margin-left: 0;
+  transform: none;
+  box-shadow: none;
+}
+
+.search-panel {
+  margin-top: 0;
+  box-shadow: none;
+}
+
+.search-fields {
+  gap: 0;
+  padding: 0;
+  border-top: 1px solid var(--editorial-line);
+  border-left: 1px solid var(--editorial-line);
+  background: transparent;
+}
+
+.search-fields label {
+  border-right: 1px solid var(--editorial-line);
+  border-bottom: 1px solid var(--editorial-line);
+}
+
+/* Seller: keep one full-bleed dramatic section, remove vertical signature. */
+.seller-signature {
+  display: none;
+}
+
+/* Buyer: remove forced offsets and let the photography breathe. */
+.buyer-images,
+.buyer-copy {
+  transform: none;
+}
+
+.buyer-detail {
+  box-shadow: 0 12px 32px rgb(42 39 34 / 12%);
+}
+
+/* Services: alternate large stories rather than sticky side-by-side scrolling. */
+@media (min-width: 64rem) {
+  .services-section > .container {
+    display: block;
+  }
+
+  .services-heading {
+    position: static;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-bottom: clamp(3rem, 5vw, 5rem);
+  }
+
+  .services-heading .section-note {
+    max-width: 34ch;
+    margin-top: 0;
+    text-align: right;
+  }
+
+  .service-list {
+    border-top: 1px solid var(--editorial-line);
+  }
+
+  .service-row,
+  .service-row:nth-child(even) {
+    display: grid;
+    grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
+    gap: clamp(2.5rem, 5vw, 6rem);
+    align-items: center;
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--editorial-line);
+  }
+
+  .service-row .service-copy {
+    order: 1;
+  }
+
+  .service-row .service-media {
+    order: 2;
+  }
+
+  .service-row:nth-child(even) .service-copy {
+    order: 2;
+  }
+
+  .service-row:nth-child(even) .service-media {
+    order: 1;
+  }
+
+  .service-media img {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+/* Gallery: arrows live directly on the active image. */
+.depth-carousel-rail {
+  isolation: isolate;
+}
+
+.depth-carousel-overlay-controls {
+  position: absolute;
+  z-index: 30;
+  top: 50%;
+  left: 50%;
+  width: min(69vw, 47rem);
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 1rem;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.depth-carousel-arrow {
+  display: inline-grid;
+  width: 3.15rem;
+  height: 3.15rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 52%);
+  border-radius: 50%;
+  background: rgb(16 17 15 / 38%);
+  color: #ffffff;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.depth-carousel-arrow:hover,
+.depth-carousel-arrow:focus-visible {
+  border-color: #f7f3eb;
+  background: #f7f3eb;
+  color: #191918;
+  transform: scale(1.04);
+}
+
+.depth-carousel-meta {
+  grid-template-columns: 7rem minmax(0, 1fr);
+  max-width: 58rem;
+  margin-inline: auto;
+}
+
+/* Contact: keep the dark finish, remove giant watermark. */
+.contact-section {
+  overflow: visible;
+}
+
+@media (max-width: 63.999rem) {
+  .depth-carousel-overlay-controls {
+    width: min(69vw, 47rem);
+  }
+
+  .depth-carousel-meta {
+    grid-template-columns: 5rem minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 47.999rem) {
+  .performance-section {
+    margin-top: 0;
+  }
+
+  .search-story-copy {
+    grid-template-columns: 1fr;
+  }
+
+  .search-story-note {
+    justify-self: start;
+  }
+
+  .depth-carousel-overlay-controls {
+    width: min(100%, 34rem);
+    padding-inline: .75rem;
+  }
+
+  .depth-carousel-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+    background: rgb(16 17 15 / 52%);
+  }
+
+  .depth-carousel-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .depth-carousel-count,
+  .depth-carousel-copy {
+    grid-column: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depth-carousel-arrow {
+    transition: none;
+  }
+}
